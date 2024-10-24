@@ -125,7 +125,7 @@
             return `${displayHours}:${displayMinutes} ${ampm}`;
         }
 
-        // تحديث التاريخ والوقت الحالي مع اليوم
+        // تحديث التاريخ والوقت الحالي مع اليوم والفاصل بنقطتين بين أجزاء التاريخ
         function updateDateTime() {
             const currentDateTime = new Date();
             
@@ -145,8 +145,8 @@
             const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
             const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
             
-            // تنسيق التاريخ والوقت
-            const formattedDateTime = `${dayName} ${day}-${month}-${year} ${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
+            // تنسيق التاريخ والوقت مع الفواصل بين أجزاء التاريخ
+            const formattedDateTime = `${dayName} ${day}:${month}:${year} ${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
             
             // تحويل الأرقام إلى الأرقام الهندية
             const formattedDateTimeArabic = toArabicNumbers(formattedDateTime);
