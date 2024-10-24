@@ -1,86 +1,20 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>أوقات الصلاة</title>
-  <script src="adhan.umd.min.js"></script>
-  <script src="script.js"></script>
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #f0f0f0;
-      font-family: 'Arial', sans-serif;
-      direction: rtl;
-      text-align: center;
-    }
-    h1 {
-      margin-bottom: 20px;
-      color: #333;
-      font-size: 28px;
-    }
-    .table-container {
-      width: 70%;
-      background-color: #fff;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-    td {
-      padding: 15px;
-      font-size: 22px;
-      text-align: center;
-    }
-    .icon-cell {
-      width: 10%;
-    }
-    .text-cell {
-      width: 30%;
-    }
-    .time-cell {
-      width: 30%;
-    }
-    .period-cell {
-      width: 30%;
-    }
-    .icon {
-      font-size: 24px;
-      color: #555;
-    }
-  </style>
-</head>
-<body>
-  <div class="table-container">
-    <h1>أوقات الصلاة في بغداد</h1>
-
-    <!-- جدول الصلوات -->
-    <table>
-      <tr>
-        <td class="icon-cell"><span class="icon">🕔</span></td>
-        <td class="text-cell">الفجر</td>
-        <td class="time-cell" id="fajr-time"></td>
-        <td class="period-cell">صباحًا</td>
-      </tr>
-      <tr>
-        <td class="icon-cell"><span class="icon">🕛</span></td>
-        <td class="text-cell">الظهر</td>
-        <td class="time-cell" id="dhuhr-time"></td>
-        <td class="period-cell">صباحًا</td>
-      </tr>
-      <tr>
-        <td class="icon-cell"><span class="icon">🕓</span></td>
-        <td class="text-cell">المغرب</td>
-        <td class="time-cell" id="maghrib-time"></td>
-        <td class="period-cell">مساءً</td>
-      </tr>
-    </table>
-  </div>
-</body>
-</html>
+<table>
+  <tr>
+    <td><i class="icon-clock"></i></td>
+    <td>الفجر</td>
+    <td id="fajr-time"></td>
+    <td id="fajr-period"></td>
+  </tr>
+  <tr>
+    <td><i class="icon-clock"></i></td>
+    <td>الظهر</td>
+    <td id="dhuhr-time"></td>
+    <td id="dhuhr-period"></td>
+  </tr>
+  <tr>
+    <td><i class="icon-clock"></i></td>
+    <td>المغرب</td>
+    <td id="maghrib-time"></td>
+    <td id="maghrib-period"></td>
+  </tr>
+</table>
