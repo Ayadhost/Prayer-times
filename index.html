@@ -22,39 +22,69 @@
       color: #333;
       font-size: 28px;
     }
-    table {
-      width: 60%;
-      border-collapse: collapse;
+    .table-container {
+      width: 70%;
       background-color: #fff;
+      padding: 20px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 20px;
-      font-size: 20px;
-      text-align: center;
-    }
-    th {
-      background-color: #f4f4f4;
-      color: #333;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
     }
     td {
+      padding: 15px;
+      font-size: 22px;
+      text-align: center;
+    }
+    .icon-cell {
+      width: 10%;
+    }
+    .text-cell {
+      width: 45%;
+    }
+    .time-cell {
+      width: 45%;
+    }
+    .icon {
+      font-size: 24px;
       color: #555;
-      font-size: 22px; /* تكبير حجم الخط */
+    }
+    .section-title {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #333;
     }
   </style>
 </head>
 <body>
-  <div>
+  <div class="table-container">
     <h1>أوقات الصلاة في بغداد</h1>
-    <table id="prayer-times-table">
-      <thead>
-        <tr>
-          <th style="width: 50%;">الصلاة</th>
-          <th style="width: 50%;">وقت الصلاة</th>
-        </tr>
-      </thead>
-      <tbody id="prayer-times"></tbody>
+
+    <!-- جدول الصباح -->
+    <div class="section-title">صباحًا</div>
+    <table>
+      <tr>
+        <td class="icon-cell"><span class="icon">🕔</span></td>
+        <td class="text-cell">الفجر</td>
+        <td class="time-cell" id="fajr-time"></td>
+      </tr>
+      <tr>
+        <td class="icon-cell"><span class="icon">🕛</span></td>
+        <td class="text-cell">الظهر</td>
+        <td class="time-cell" id="dhuhr-time"></td>
+      </tr>
+    </table>
+
+    <!-- جدول المساء -->
+    <div class="section-title">مساءً</div>
+    <table>
+      <tr>
+        <td class="icon-cell"><span class="icon">🕓</span></td>
+        <td class="text-cell">المغرب</td>
+        <td class="time-cell" id="maghrib-time"></td>
+      </tr>
     </table>
   </div>
 </body>
