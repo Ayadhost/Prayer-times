@@ -1,87 +1,82 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أوقات الصلاة في بغداد</title>
+    <title>أوقات الصلاة</title>
+    <link rel="icon" href="https://github.com/Ayadhost/Prayer-times/raw/main/favicon.png" type="image/png" sizes="32x32">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #1c1c1c;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
+            direction: rtl;
         }
         h1 {
-            margin: 20px 0;
-            font-size: 2.5rem;
-        }
-        #current-date-time {
-            font-size: 1.4rem;
-            color: #bbbbbb;
-            margin-bottom: 30px;
+            font-size: 2.5em;
+            margin-bottom: 20px;
         }
         table {
-            width: 70%;
-            margin: 40px auto;
-            border-collapse: collapse;
-            background-color: #333;
-            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
-        }
-        th, td {
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid #444;
-            font-size: 1.6rem;
-            color: #ffffff;
+            width: 50%;
+            margin: 0 auto;
+            border-collapse: separate;
+            border-spacing: 0 15px;
         }
         td {
-            position: relative;
-            margin: 10px 0;
-            background-color: #2c2c2c;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            font-size: 1.5em;
             border-radius: 10px;
-            transition: transform 0.2s ease;
-        }
-        td:hover {
-            transform: scale(1.05);
+            background-color: #1e1e1e;
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.2);
         }
         .icon {
-            font-size: 2.5rem;
-            color: #4CAF50;
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
         }
-        td:last-child {
-            color: #f0f0f0;
+        #current-time {
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 30px;
         }
     </style>
 </head>
 <body>
 
-<h1>أوقات الصلاة في بغداد</h1>
-<div id="current-date-time"></div> <!-- حقل عرض التاريخ والوقت -->
+    <h1>أوقات الصلاة في بغداد</h1>
+    
+    <div id="current-time"></div>
 
-<table>
-    <tr>
-        <td class="icon">🕒</td>
-        <td>الفجر</td>
-        <td id="fajr-time"></td>
-        <td>صباحًا</td>
-    </tr>
-    <tr>
-        <td class="icon">🕒</td>
-        <td>الظهر</td>
-        <td id="dhuhr-time"></td>
-        <td>صباحًا</td>
-    </tr>
-    <tr>
-        <td class="icon">🕒</td>
-        <td>المغرب</td>
-        <td id="maghrib-time"></td>
-        <td>مساءً</td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <td><img src="https://img.icons8.com/ios-filled/50/ffffff/alarm.png" class="icon" alt="Icon"> الفجر</td>
+            <td>٤:٥١</td>
+            <td>صباحًا</td>
+        </tr>
+        <tr>
+            <td><img src="https://img.icons8.com/ios-filled/50/ffffff/alarm.png" class="icon" alt="Icon"> الظهر</td>
+            <td>١١:٤٨</td>
+            <td>صباحًا</td>
+        </tr>
+        <tr>
+            <td><img src="https://img.icons8.com/ios-filled/50/ffffff/alarm.png" class="icon" alt="Icon"> المغرب</td>
+            <td>٥:١٨</td>
+            <td>مساءً</td>
+        </tr>
+    </table>
 
-<script src="script.js"></script>
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+            const formattedTime = now.toLocaleString('ar-EG', options).replace(/,/g, '');
+            document.getElementById('current-time').textContent = `التاريخ والوقت الحالي: ${formattedTime}`;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+
 </body>
 </html>
