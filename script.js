@@ -3,9 +3,20 @@ document.addEventListener('DOMContentLoaded', function () {
   const params = adhan.CalculationMethod.MuslimWorldLeague(); // Calculation method
   const prayerTimes = new adhan.PrayerTimes(coordinates, new Date(), params);
 
-  const fajr = prayerTimes.fajr.toLocaleTimeString();
-  const dhuhr = prayerTimes.dhuhr.toLocaleTimeString();
-  const maghrib = prayerTimes.maghrib.toLocaleTimeString();
+  // Function to format time and replace AM/PM with Arabic equivalents
+  function formatTime(time) {
+    let timeString = time.toLocaleTimeString('ar-EG', { hour: 'numeric', minute: 'numeric', second: 'numeric' });
+    if (timeString.includes('ص')) {
+      timeString = timeString.replace('ص', 'صباحًا');
+    } else if (timeString.includes('م')) {
+      timeString = timeString.replace('م', 'مساءً');
+    }
+    return timeString;
+  }
+
+  const fajr = formatTime(prayerTimes.fajr);
+  const dhuhr = formatTime(prayerTimes.dhuhr);
+  const maghrib = formatTime(prayerTimes.maghrib);
 
   document.getElementById('prayer-times').innerHTML = `
     <p>الفجر: ${fajr}</p>
