@@ -2,18 +2,18 @@ document.addEventListener("DOMContentLoaded", function() {
     // إعدادات الزاوية لحساب أوقات الصلاة
     const prayerTimesConfig = {
         method: {
-            fajrAngle: 16,  // هنا يمكن تعديل زاوية الفجر
-            maghribAngle: 4.5,  // هنا يمكن تعديل زاوية المغرب
-            ishaAngle: 18,  // هنا يمكن تعديل زاوية العشاء
+            fajrAngle: 16,  // زاوية الفجر
+            maghribAngle: 4.5,  // زاوية المغرب
+            ishaAngle: 18,  // زاوية العشاء
         }
     };
 
-    // تنسيق الوقت لإزالة الثواني واستخدام نظام 12 ساعة
+    // تنسيق الوقت بدون ثواني وبنظام 12 ساعة
     function formatTime(date) {
         const hours = date.getHours();
         const minutes = date.getMinutes();
         const ampm = hours >= 12 ? 'مساءً' : 'صباحًا';
-        const displayHours = hours % 12 || 12; // تحويل إلى نظام 12 ساعة
+        const displayHours = hours % 12 || 12;
         const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
         return `${displayHours}:${displayMinutes}`;
     }
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return num.replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
     }
 
-    // إعداد الموقع والتاريخ لحساب أوقات الصلاة
+    // إعداد الإحداثيات والتاريخ لحساب أوقات الصلاة
     const coordinates = new adhan.Coordinates(33.3152, 44.3661);  // إحداثيات بغداد
     const date = new Date();
     const prayerTimes = new adhan.PrayerTimes(coordinates, date, prayerTimesConfig);
@@ -41,30 +41,22 @@ document.addEventListener("DOMContentLoaded", function() {
     // تحديث التاريخ والوقت الحالي في الحقل تحت العنوان
     function updateDateTime() {
         const currentDateTime = new Date();
-        
-        // الحصول على أجزاء التاريخ
         const day = currentDateTime.getDate();
         const month = currentDateTime.getMonth() + 1; // getMonth() تعطي الشهور من 0 إلى 11، لذلك نضيف 1
         const year = currentDateTime.getFullYear();
         const hours = currentDateTime.getHours();
         const minutes = currentDateTime.getMinutes();
         const ampm = hours >= 12 ? 'مساءً' : 'صباحًا';
-        
-        // تحويل الساعات إلى نظام 12 ساعة
+
         const displayHours = hours % 12 || 12;
         const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
-        
-        // تنسيق التاريخ والوقت
+
         const formattedDateTime = `${day}-${month}-${year} ${displayHours}:${displayMinutes} ${ampm}`;
-        
-        // تحويل الأرقام إلى الأرقام الهندية
         const formattedDateTimeArabic = toArabicNumbers(formattedDateTime);
 
-        // تحديث النص
         document.getElementById("current-date-time").textContent = formattedDateTimeArabic;
     }
 
-    // استدعاء الدالة عند التحميل وتحديث الوقت كل ثانية
     updateDateTime();
     setInterval(updateDateTime, 1000);
 });
