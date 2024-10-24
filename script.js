@@ -28,10 +28,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // تعيين أوقات الصلاة في الجدول
     document.getElementById("fajr-time").textContent = formatTime(prayerTimes.fajr);
+    document.getElementById("sunrise-time").textContent = formatTime(prayerTimes.sunrise);
     document.getElementById("dhuhr-time").textContent = formatTime(prayerTimes.dhuhr);
-    document.getElementById("maghrib-time").textContent = formatTime(prayerTimes.maghrib);
+    document.getElementById("sunset-time").textContent = formatTime(prayerTimes.maghrib); // غروب الشمس
     document.getElementById("isha-time").textContent = formatTime(prayerTimes.isha);
-    document.getElementById("sunset-time").textContent = formatTime(prayerTimes.maghrib); // وقت الغروب يساوي المغرب
 
     // تحديث التاريخ والوقت الحالي في الحقل تحت العنوان
     function updateDateTime() {
