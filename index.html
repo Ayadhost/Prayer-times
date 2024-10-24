@@ -42,19 +42,17 @@
       width: 10%;
     }
     .text-cell {
-      width: 45%;
+      width: 30%;
     }
     .time-cell {
-      width: 45%;
+      width: 30%;
+    }
+    .period-cell {
+      width: 30%;
     }
     .icon {
       font-size: 24px;
       color: #555;
-    }
-    .section-title {
-      font-size: 24px;
-      margin-bottom: 10px;
-      color: #333;
     }
   </style>
 </head>
@@ -62,28 +60,25 @@
   <div class="table-container">
     <h1>أوقات الصلاة في بغداد</h1>
 
-    <!-- جدول الصباح -->
-    <div class="section-title">صباحًا</div>
+    <!-- جدول الصلوات -->
     <table>
       <tr>
         <td class="icon-cell"><span class="icon">🕔</span></td>
         <td class="text-cell">الفجر</td>
         <td class="time-cell" id="fajr-time"></td>
+        <td class="period-cell">صباحًا</td>
       </tr>
       <tr>
         <td class="icon-cell"><span class="icon">🕛</span></td>
         <td class="text-cell">الظهر</td>
         <td class="time-cell" id="dhuhr-time"></td>
+        <td class="period-cell">صباحًا</td>
       </tr>
-    </table>
-
-    <!-- جدول المساء -->
-    <div class="section-title">مساءً</div>
-    <table>
       <tr>
         <td class="icon-cell"><span class="icon">🕓</span></td>
         <td class="text-cell">المغرب</td>
         <td class="time-cell" id="maghrib-time"></td>
+        <td class="period-cell">مساءً</td>
       </tr>
     </table>
   </div>
