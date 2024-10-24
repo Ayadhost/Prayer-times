@@ -66,17 +66,5 @@
         </tr>
     </table>
 
-    <script>
-        function updateTime() {
-            const now = new Date();
-            const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
-            const formattedTime = now.toLocaleString('ar-EG', options).replace(/,/g, '');
-            document.getElementById('current-time').textContent = `التاريخ والوقت الحالي: ${formattedTime}`;
-        }
-
-        updateTime();
-        setInterval(updateTime, 1000);
-    </script>
-
 </body>
 </html>
