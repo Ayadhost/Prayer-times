@@ -67,26 +67,31 @@
         <td class="icon">🕒</td>
         <td>الفجر</td>
         <td id="fajr-time"></td>
+        <td>صباحًا</td>
     </tr>
     <tr>
         <td class="icon">🕒</td>
         <td>الشروق</td>
         <td id="sunrise-time"></td>
+        <td>صباحًا</td>
     </tr>
     <tr>
         <td class="icon">🕒</td>
         <td>الظهر</td>
         <td id="dhuhr-time"></td>
+        <td>صباحًا</td>
     </tr>
     <tr>
         <td class="icon">🕒</td>
         <td>الغروب</td>
-        <td id="maghrib-time"></td>
+        <td id="sunset-time"></td>
+        <td>مساءً</td>
     </tr>
     <tr>
         <td class="icon">🕒</td>
         <td>العشاء</td>
         <td id="isha-time"></td>
+        <td>مساءً</td>
     </tr>
 </table>
 
@@ -114,6 +119,7 @@
         document.getElementById("dhuhr-time").textContent = toArabicNumbers(formatTime(prayerTimes.dhuhr));
         document.getElementById("maghrib-time").textContent = toArabicNumbers(formatTime(prayerTimes.maghrib));
         document.getElementById("isha-time").textContent = toArabicNumbers(formatTime(prayerTimes.isha));
+        document.getElementById("sunset-time").textContent = toArabicNumbers(formatTime(prayerTimes.sunset)); // وقت الغروب
 
         // دالة تنسيق الوقت لعرض الساعات والدقائق فقط
         function formatTime(date) {
