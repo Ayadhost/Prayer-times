@@ -1,12 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     // إعدادات الزاوية لحساب أوقات الصلاة
-    const prayerTimesConfig = {
-        method: {
-            fajrAngle: 16,  // زاوية الفجر
-            maghribAngle: 4.5,  // زاوية المغرب
-            ishaAngle: 18,  // زاوية العشاء
-        }
-    };
+    const params = adhan.CalculationMethod.MuslimWorldLeague();
+    params.fajrAngle = 16;  // زاوية الفجر
+    params.ishaAngle = 18;  // زاوية العشاء
 
     // تنسيق الوقت بدون ثواني وبنظام 12 ساعة
     function formatTime(date) {
@@ -26,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // إعداد الإحداثيات والتاريخ لحساب أوقات الصلاة
     const coordinates = new adhan.Coordinates(33.3152, 44.3661);  // إحداثيات بغداد
     const date = new Date();
-    const prayerTimes = new adhan.PrayerTimes(coordinates, date, prayerTimesConfig);
+    const prayerTimes = new adhan.PrayerTimes(coordinates, date, params);
 
     // الحصول على أوقات الصلاة وتنسيقها
     const fajrTime = formatTime(prayerTimes.fajr);
