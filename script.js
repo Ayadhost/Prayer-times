@@ -3,23 +3,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // إعدادات حساب الصلاة مع الزوايا
     const params = adhan.CalculationMethod.Other(); 
-    params.fajrAngle = 20; // يمكنك تعديل الزاوية هنا
-    params.ishaAngle = 14; // يمكنك تعديل زاوية العشاء هنا
+    params.fajrAngle = 18; // تعديل زاوية الفجر
+    params.ishaAngle = 17; // تعديل زاوية العشاء
 
     const date = new Date();
     const prayerTimes = new adhan.PrayerTimes(coordinates, date, params);
 
-    // تحويل الأرقام إلى الأرقام الهندية
-    function toArabicNumbers(num) {
-        return num.replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
-    }
-
     // عرض أوقات الصلاة في العناصر المناسبة
-    document.getElementById("fajr-time").textContent = toArabicNumbers(formatTime(prayerTimes.fajr));
-    document.getElementById("sunrise-time").textContent = toArabicNumbers(formatTime(prayerTimes.sunrise));
-    document.getElementById("dhuhr-time").textContent = toArabicNumbers(formatTime(prayerTimes.dhuhr));
-    document.getElementById("maghrib-time").textContent = toArabicNumbers(formatTime(prayerTimes.maghrib));
-    document.getElementById("isha-time").textContent = toArabicNumbers(formatTime(prayerTimes.isha));
+    document.getElementById("fajr-time").textContent = formatTime(prayerTimes.fajr);
+    document.getElementById("sunrise-time").textContent = formatTime(prayerTimes.sunrise);
+    document.getElementById("dhuhr-time").textContent = formatTime(prayerTimes.dhuhr);
+    document.getElementById("maghrib-time").textContent = formatTime(prayerTimes.maghrib);
+    document.getElementById("isha-time").textContent = formatTime(prayerTimes.isha);
 
     // دالة تنسيق الوقت لعرض الساعات والدقائق فقط
     function formatTime(date) {
