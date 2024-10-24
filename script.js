@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // إعدادات حساب الصلاة مع الزوايا
     const params = adhan.CalculationMethod.Other(); 
-    params.fajrAngle = 16; // يمكنك تعديل الزاوية هنا
+    params.fajrAngle = 18; // يمكنك تعديل الزاوية هنا
     params.ishaAngle = 14; // يمكنك تعديل زاوية العشاء هنا
 
     const date = new Date();
