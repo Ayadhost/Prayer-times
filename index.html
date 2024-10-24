@@ -19,7 +19,7 @@
             font-size: 2.5rem;
         }
         #current-date-time {
-            font-size: 1.4rem;
+            font-size: 2rem; /* تكبير الخط */
             color: #bbbbbb;
             margin-bottom: 30px;
         }
@@ -80,7 +80,7 @@
     </tr>
     <tr>
         <td class="icon">🕒</td>
-        <td>الغروب</td> <!-- تم استبدال كلمة المغرب بالغروب -->
+        <td>الغروب</td>
         <td id="maghrib-time"></td>
     </tr>
     <tr>
@@ -115,7 +115,7 @@
         document.getElementById("maghrib-time").textContent = toArabicNumbers(formatTime(prayerTimes.maghrib));
         document.getElementById("isha-time").textContent = toArabicNumbers(formatTime(prayerTimes.isha));
 
-        // دالة تنسيق الوقت لعرض الساعات والدقائق فقط
+        // دالة تنسيق الوقت لعرض الساعات والدقائق فقط مع نقطتين بينهما
         function formatTime(date) {
             const hours = date.getHours();
             const minutes = date.getMinutes();
@@ -125,11 +125,13 @@
             return `${displayHours}:${displayMinutes} ${ampm}`;
         }
 
-        // تحديث التاريخ والوقت الحالي في الحقل تحت العنوان
+        // تحديث التاريخ والوقت الحالي مع اليوم
         function updateDateTime() {
             const currentDateTime = new Date();
             
             // الحصول على أجزاء التاريخ
+            const daysOfWeek = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+            const dayName = daysOfWeek[currentDateTime.getDay()]; // اليوم
             const day = currentDateTime.getDate();
             const month = currentDateTime.getMonth() + 1; // getMonth() تعطي الشهور من 0 إلى 11، لذلك نضيف 1
             const year = currentDateTime.getFullYear();
@@ -144,7 +146,7 @@
             const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
             
             // تنسيق التاريخ والوقت
-            const formattedDateTime = `${day}-${month}-${year} ${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
+            const formattedDateTime = `${dayName} ${day}-${month}-${year} ${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
             
             // تحويل الأرقام إلى الأرقام الهندية
             const formattedDateTimeArabic = toArabicNumbers(formattedDateTime);
