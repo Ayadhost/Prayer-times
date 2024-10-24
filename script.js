@@ -18,9 +18,19 @@ document.addEventListener('DOMContentLoaded', function () {
   const dhuhr = formatTime(prayerTimes.dhuhr);
   const maghrib = formatTime(prayerTimes.maghrib);
 
+  // Inserting the prayer times into the table
   document.getElementById('prayer-times').innerHTML = `
-    <p>الفجر: ${fajr}</p>
-    <p>الظهر: ${dhuhr}</p>
-    <p>المغرب: ${maghrib}</p>
+    <tr>
+      <td>الفجر</td>
+      <td>${fajr}</td>
+    </tr>
+    <tr>
+      <td>الظهر</td>
+      <td>${dhuhr}</td>
+    </tr>
+    <tr>
+      <td>المغرب</td>
+      <td>${maghrib}</td>
+    </tr>
   `;
 });
