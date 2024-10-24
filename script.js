@@ -16,11 +16,15 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("dhuhr-time").textContent = toArabicNumbers(prayerTimes.dhuhr);
     document.getElementById("maghrib-time").textContent = toArabicNumbers(prayerTimes.maghrib);
 
+    // أيام الأسبوع باللغة العربية
+    const daysOfWeek = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+
     // تحديث التاريخ والوقت الحالي في الحقل تحت العنوان
     function updateDateTime() {
         const currentDateTime = new Date();
         
         // الحصول على أجزاء التاريخ
+        const dayOfWeek = daysOfWeek[currentDateTime.getDay()]; // يوم الأسبوع
         const day = currentDateTime.getDate();
         const month = currentDateTime.getMonth() + 1; // getMonth() تعطي الشهور من 0 إلى 11، لذلك نضيف 1
         const year = currentDateTime.getFullYear();
@@ -35,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
         
         // تنسيق التاريخ والوقت
-        const formattedDateTime = `${day}-${month}-${year} ${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
+        const formattedDateTime = `${dayOfWeek} ${day}-${month}-${year} ${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
         
         // تحويل الأرقام إلى الأرقام الهندية
         const formattedDateTimeArabic = toArabicNumbers(formattedDateTime);
