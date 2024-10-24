@@ -1,14 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prayer Times</title>
+  <title>أوقات الصلاة</title>
   <script src="adhan.umd.min.js"></script>
   <script src="script.js"></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      font-family: 'Arial', sans-serif;
+      direction: rtl;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    #prayer-times p {
+      font-size: 20px;
+      color: #444;
+      margin: 5px 0;
+    }
+  </style>
 </head>
 <body>
-  <h1>Prayer Times for Baghdad</h1>
-  <div id="prayer-times"></div>
+  <div>
+    <h1>أوقات الصلاة في بغداد</h1>
+    <div id="prayer-times"></div>
+  </div>
 </body>
 </html>
