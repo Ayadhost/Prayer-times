@@ -1,70 +1,50 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أوقات الصلاة</title>
-    <link rel="icon" href="https://github.com/Ayadhost/Prayer-times/raw/main/favicon.png" type="image/png" sizes="32x32">
-    <style>
-        body {
-            background-color: #121212;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            direction: rtl;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        table {
-            width: 50%;
-            margin: 0 auto;
-            border-collapse: separate;
-            border-spacing: 0 15px;
-        }
-        td {
-            padding: 15px;
-            font-size: 1.5em;
-            border-radius: 10px;
-            background-color: #1e1e1e;
-            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.2);
-        }
-        .icon {
-            width: 30px;
-            height: 30px;
-            vertical-align: middle;
-        }
-        #current-time {
-            font-size: 1.2em;
-            margin-top: 20px;
-            margin-bottom: 30px;
-        }
-    </style>
-</head>
-<body>
+document.addEventListener("DOMContentLoaded", function() {
+    // أوقات الصلاة بدون ثواني
+    const prayerTimes = {
+        fajr: "4:51",
+        dhuhr: "11:48",
+        maghrib: "5:18"
+    };
 
-    <h1>أوقات الصلاة في بغداد</h1>
-    
-    <div id="current-time"></div>
+    // تحويل الأرقام إلى الأرقام الهندية
+    function toArabicNumbers(num) {
+        return num.replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
+    }
 
-    <table>
-        <tr>
-            <td><img src="https://img.icons8.com/ios-filled/50/ffffff/alarm.png" class="icon" alt="Icon"> الفجر</td>
-            <td>٤:٥١</td>
-            <td>صباحًا</td>
-        </tr>
-        <tr>
-            <td><img src="https://img.icons8.com/ios-filled/50/ffffff/alarm.png" class="icon" alt="Icon"> الظهر</td>
-            <td>١١:٤٨</td>
-            <td>صباحًا</td>
-        </tr>
-        <tr>
-            <td><img src="https://img.icons8.com/ios-filled/50/ffffff/alarm.png" class="icon" alt="Icon"> المغرب</td>
-            <td>٥:١٨</td>
-            <td>مساءً</td>
-        </tr>
-    </table>
+    // تعيين أوقات الصلاة في الجدول مع تحويل الأرقام
+    document.getElementById("fajr-time").textContent = toArabicNumbers(prayerTimes.fajr);
+    document.getElementById("dhuhr-time").textContent = toArabicNumbers(prayerTimes.dhuhr);
+    document.getElementById("maghrib-time").textContent = toArabicNumbers(prayerTimes.maghrib);
 
-</body>
-</html>
+    // تحديث التاريخ والوقت الحالي في الحقل تحت العنوان
+    function updateDateTime() {
+        const currentDateTime = new Date();
+        
+        // الحصول على أجزاء التاريخ
+        const day = currentDateTime.getDate();
+        const month = currentDateTime.getMonth() + 1; // getMonth() تعطي الشهور من 0 إلى 11، لذلك نضيف 1
+        const year = currentDateTime.getFullYear();
+        const hours = currentDateTime.getHours();
+        const minutes = currentDateTime.getMinutes();
+        const seconds = currentDateTime.getSeconds();
+        const ampm = hours >= 12 ? 'مساءً' : 'صباحًا';
+        
+        // تحويل الساعات إلى نظام 12 ساعة
+        const displayHours = hours % 12 || 12;
+        const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+        const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
+        
+        // تنسيق التاريخ والوقت
+        const formattedDateTime = `${day}-${month}-${year} ${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
+        
+        // تحويل الأرقام إلى الأرقام الهندية
+        const formattedDateTimeArabic = toArabicNumbers(formattedDateTime);
+
+        // تحديث النص
+        document.getElementById("current-date-time").textContent = formattedDateTimeArabic;
+    }
+
+    // استدعاء الدالة عند التحميل وتحديث الوقت كل ثانية
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+});
