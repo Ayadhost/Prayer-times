@@ -19,18 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const maghrib = formatTime(prayerTimes.maghrib);
 
   // إضافة أوقات الصلاة إلى الجدول
-  document.getElementById('prayer-times').innerHTML = `
-    <tr>
-      <td>الفجر</td>
-      <td>${fajr}</td>
-    </tr>
-    <tr>
-      <td>الظهر</td>
-      <td>${dhuhr}</td>
-    </tr>
-    <tr>
-      <td>المغرب</td>
-      <td>${maghrib}</td>
-    </tr>
-  `;
+  document.getElementById('fajr-time').textContent = fajr;
+  document.getElementById('dhuhr-time').textContent = dhuhr;
+  document.getElementById('maghrib-time').textContent = maghrib;
 });
