@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const maghrib = prayerTimes.maghrib.toLocaleTimeString();
 
   document.getElementById('prayer-times').innerHTML = `
-    <p>Fajr: ${fajr}</p>
-    <p>Dhuhr: ${dhuhr}</p>
-    <p>Maghrib: ${maghrib}</p>
+    <p>الفجر: ${fajr}</p>
+    <p>الظهر: ${dhuhr}</p>
+    <p>المغرب: ${maghrib}</p>
   `;
 });
