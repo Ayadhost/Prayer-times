@@ -11,6 +11,13 @@ document.addEventListener("DOMContentLoaded", function() {
     // حساب أوقات الصلاة بناءً على الزوايا
     const prayerTimes = new adhan.PrayerTimes(coordinates, new Date(), params);
 
+    // أوقات ثابتة (يمكنك تعديل هذه الأوقات إن كانت تختلف عن الأوقات الفعلية)
+    const fixedTimes = {
+        sunrise: "6:15",  // وقت شروق الشمس الثابت
+        dhuhr: "12:30",   // وقت الظهر الثابت
+        sunset: "5:45"    // وقت الغروب الثابت
+    };
+
     // تحويل الأرقام إلى الأرقام الهندية
     function toArabicNumbers(num) {
         return num.replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
@@ -26,12 +33,12 @@ document.addEventListener("DOMContentLoaded", function() {
         return `${toArabicNumbers(displayHours + ':' + displayMinutes)} ${ampm}`;
     }
 
-    // تعيين أوقات الصلاة في الجدول
+    // تعيين أوقات الصلاة في الجدول (مع تحويل الأرقام)
     document.getElementById("fajr-time").textContent = formatTime(prayerTimes.fajr);
-    document.getElementById("sunrise-time").textContent = formatTime(prayerTimes.sunrise);
-    document.getElementById("dhuhr-time").textContent = formatTime(prayerTimes.dhuhr);
-    document.getElementById("sunset-time").textContent = formatTime(prayerTimes.maghrib); // غروب الشمس
-    document.getElementById("isha-time").textContent = formatTime(prayerTimes.isha);
+    document.getElementById("sunrise-time").textContent = toArabicNumbers(fixedTimes.sunrise); // شروق الشمس ثابت
+    document.getElementById("dhuhr-time").textContent = toArabicNumbers(fixedTimes.dhuhr);     // الظهر ثابت
+    document.getElementById("sunset-time").textContent = toArabicNumbers(fixedTimes.sunset);   // الغروب ثابت
+    document.getElementById("isha-time").textContent = formatTime(prayerTimes.isha);           // العشاء متغير
 
     // تحديث التاريخ والوقت الحالي في الحقل تحت العنوان
     function updateDateTime() {
