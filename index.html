@@ -67,26 +67,31 @@
         <td class="icon">🕒</td>
         <td>الفجر</td>
         <td id="fajr-time"></td>
+        <td>صباحًا</td>
     </tr>
     <tr>
         <td class="icon">🕒</td>
         <td>الشروق</td>
         <td id="sunrise-time"></td>
+        <td>صباحًا</td>
     </tr>
     <tr>
         <td class="icon">🕒</td>
         <td>الظهر</td>
         <td id="dhuhr-time"></td>
+        <td>صباحًا</td>
     </tr>
     <tr>
         <td class="icon">🕒</td>
-        <td>الغروب</td>
+        <td>الغروب</td> <!-- تم استبدال كلمة المغرب بالغروب -->
         <td id="maghrib-time"></td>
+        <td>مساءً</td>
     </tr>
     <tr>
         <td class="icon">🕒</td>
         <td>العشاء</td>
         <td id="isha-time"></td>
+        <td>مساءً</td>
     </tr>
 </table>
 
@@ -121,7 +126,8 @@
             const minutes = date.getMinutes();
             const displayHours = (hours % 12) || 12; // تحويل إلى نظام 12 ساعة
             const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
-            return `${displayHours}:${displayMinutes}`;
+            const ampm = hours >= 12 ? 'مساءً' : 'صباحًا';
+            return `${displayHours}:${displayMinutes} ${ampm}`;
         }
 
         // تحديث التاريخ والوقت الحالي في الحقل تحت العنوان
