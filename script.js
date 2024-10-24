@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const coordinates = new adhan.Coordinates(33.3152, 44.3661); // Baghdad coordinates
-  const params = adhan.CalculationMethod.MuslimWorldLeague(); // Calculation method
+  const coordinates = new adhan.Coordinates(33.3152, 44.3661); // إحداثيات بغداد
+  const params = adhan.CalculationMethod.MuslimWorldLeague(); // طريقة الحساب
   const prayerTimes = new adhan.PrayerTimes(coordinates, new Date(), params);
 
-  // Function to format time and replace AM/PM with Arabic equivalents
+  // وظيفة لتنسيق الوقت واستبدال AM/PM بما يعادلها بالعربية
   function formatTime(time) {
     let timeString = time.toLocaleTimeString('ar-EG', { hour: 'numeric', minute: 'numeric', second: 'numeric' });
     if (timeString.includes('ص')) {
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const dhuhr = formatTime(prayerTimes.dhuhr);
   const maghrib = formatTime(prayerTimes.maghrib);
 
-  // Inserting the prayer times into the table
+  // إضافة أوقات الصلاة إلى الجدول
   document.getElementById('prayer-times').innerHTML = `
     <tr>
       <td>الفجر</td>
