@@ -60,7 +60,7 @@
 <body>
 
 <h1>أوقات الصلاة في بغداد</h1>
-<div id="current-date-time"></div>
+<div id="current-date-time"></div> <!-- حقل عرض التاريخ والوقت -->
 
 <table>
     <tr>
@@ -83,60 +83,6 @@
     </tr>
 </table>
 
-<script src="adhan.umd.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    // ضبط الزوايا حسب المذهب الشيعي
-    const params = adhan.CalculationMethod.MuslimWorldLeague();
-    params.fajrAngle = 16;  // زاوية الفجر
-    params.ishaAngle = 14;  // زاوية العشاء
-    params.adjustments = { dhuhr: 0 };
-
-    // حساب أوقات الصلاة باستخدام إحداثيات بغداد
-    const prayerTimes = new adhan.PrayerTimes(
-        new adhan.Coordinates(33.3152, 44.3661),  // إحداثيات بغداد
-        new Date(),
-        params
-    );
-
-    // تحويل الأرقام إلى الأرقام الهندية
-    function toArabicNumbers(num) {
-        return num.toString().replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
-    }
-
-    // تعيين أوقات الصلاة في الجدول
-    document.getElementById("fajr-time").textContent = toArabicNumbers(prayerTimes.fajr.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-    document.getElementById("dhuhr-time").textContent = toArabicNumbers(prayerTimes.dhuhr.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-    document.getElementById("maghrib-time").textContent = toArabicNumbers(prayerTimes.maghrib.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-
-    // تحديث التاريخ والوقت الحالي
-    function updateDateTime() {
-        const currentDateTime = new Date();
-        const day = currentDateTime.getDate();
-        const month = currentDateTime.getMonth() + 1; // الشهور تبدأ من 0
-        const year = currentDateTime.getFullYear();
-        const hours = currentDateTime.getHours();
-        const minutes = currentDateTime.getMinutes();
-        const seconds = currentDateTime.getSeconds();
-        const ampm = hours >= 12 ? 'مساءً' : 'صباحًا';
-
-        // تنسيق الوقت ليظهر بالساعات والدقائق فقط
-        const displayHours = hours % 12 || 12;
-        const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
-        const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
-
-        // تنسيق التاريخ والوقت
-        const formattedDateTime = `${toArabicNumbers(day)}-${toArabicNumbers(month)}-${toArabicNumbers(year)} ${toArabicNumbers(displayHours)}:${toArabicNumbers(displayMinutes)} ${ampm}`;
-
-        // تحديث النص
-        document.getElementById("current-date-time").textContent = formattedDateTime;
-    }
-
-    // تحديث التاريخ والوقت كل ثانية
-    updateDateTime();
-    setInterval(updateDateTime, 1000);
-});
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
