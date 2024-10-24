@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
     // إعدادات الزاوية (زاوية الفجر وزاوية العشاء)
     const params = {
-        fajrAngle: 16, // زاوية الفجر
-        ishaAngle: 14  // زاوية العشاء
+        method: {
+            fajrAngle: 16, // زاوية الفجر
+            ishaAngle: 14  // زاوية العشاء
+        }
     };
 
     // إعدادات الموقع (خطوط العرض والطول)
