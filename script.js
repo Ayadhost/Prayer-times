@@ -1,19 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // إعداد الإحداثيات لموقع بغداد
-    const coordinates = new adhan.Coordinates(33.3152, 44.3661); // إحداثيات بغداد
-    
-    // إعداد معايير الحساب وتحديد الزوايا يدويًا
-    const params = adhan.CalculationMethod.MuslimWorldLeague(); // أو استخدم طريقة حساب مفضلة
-    params.fajrAngle = 16;  // زاوية الفجر حسب المذهب الشيعي
-    params.ishaAngle = 4;   // زاوية العشاء حسب المذهب الشيعي
-
-    // حساب أوقات الصلاة
-    const prayerTimes = new adhan.PrayerTimes(coordinates, new Date(), params);
-    
-    // تحويل الأوقات إلى صيغة ساعة ودقيقة بدون ثوانٍ
-    const fajrTime = prayerTimes.fajr.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const dhuhrTime = prayerTimes.dhuhr.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const maghribTime = prayerTimes.maghrib.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    // أوقات الصلاة بدون ثواني
+    const prayerTimes = {
+        fajr: "4:51",
+        dhuhr: "11:48",
+        maghrib: "5:18"
+    };
 
     // تحويل الأرقام إلى الأرقام الهندية
     function toArabicNumbers(num) {
@@ -21,9 +12,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // تعيين أوقات الصلاة في الجدول مع تحويل الأرقام
-    document.getElementById("fajr-time").textContent = toArabicNumbers(fajrTime);
-    document.getElementById("dhuhr-time").textContent = toArabicNumbers(dhuhrTime);
-    document.getElementById("maghrib-time").textContent = toArabicNumbers(maghribTime);
+    document.getElementById("fajr-time").textContent = toArabicNumbers(prayerTimes.fajr);
+    document.getElementById("dhuhr-time").textContent = toArabicNumbers(prayerTimes.dhuhr);
+    document.getElementById("maghrib-time").textContent = toArabicNumbers(prayerTimes.maghrib);
 
     // تحديث التاريخ والوقت الحالي في الحقل تحت العنوان
     function updateDateTime() {
@@ -31,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         // الحصول على أجزاء التاريخ
         const day = currentDateTime.getDate();
-        const month = currentDateTime.getMonth() + 1; // getMonth() تعطي الشهور من 0 إلى 11، لذلك نضيف 1
+        const month = currentDateTime.getMonth() + 1;
         const year = currentDateTime.getFullYear();
         const hours = currentDateTime.getHours();
         const minutes = currentDateTime.getMinutes();
@@ -44,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
         
         // تنسيق التاريخ والوقت
-        const formattedDateTime = `${day}-${month}-${year} ${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
+        const formattedDateTime = `${day}-${month}-${year} ${displayHours}:${displayMinutes} ${ampm}`;
         
         // تحويل الأرقام إلى الأرقام الهندية
         const formattedDateTimeArabic = toArabicNumbers(formattedDateTime);
