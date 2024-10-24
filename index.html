@@ -20,17 +20,19 @@
     h1 {
       margin-bottom: 20px;
       color: #333;
+      font-size: 28px;
     }
     table {
-      width: 50%;
+      width: 60%;
       border-collapse: collapse;
       background-color: #fff;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     th, td {
       border: 1px solid #ddd;
-      padding: 12px;
-      font-size: 18px;
+      padding: 20px;
+      font-size: 20px;
+      text-align: center;
     }
     th {
       background-color: #f4f4f4;
@@ -38,6 +40,7 @@
     }
     td {
       color: #555;
+      font-size: 22px; /* تكبير حجم الخط */
     }
   </style>
 </head>
@@ -47,8 +50,8 @@
     <table id="prayer-times-table">
       <thead>
         <tr>
-          <th>الصلاة</th>
-          <th>وقت الصلاة</th>
+          <th style="width: 50%;">الصلاة</th>
+          <th style="width: 50%;">وقت الصلاة</th>
         </tr>
       </thead>
       <tbody id="prayer-times"></tbody>
