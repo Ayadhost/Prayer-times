@@ -3,15 +3,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const params = adhan.CalculationMethod.MuslimWorldLeague(); // طريقة الحساب
   const prayerTimes = new adhan.PrayerTimes(coordinates, new Date(), params);
 
-  // وظيفة لتنسيق الوقت واستبدال AM/PM بما يعادلها بالعربية
+  // وظيفة لتنسيق الوقت بدون صباحًا/مساءً
   function formatTime(time) {
-    let timeString = time.toLocaleTimeString('ar-EG', { hour: 'numeric', minute: 'numeric', second: 'numeric' });
-    if (timeString.includes('ص')) {
-      timeString = timeString.replace('ص', 'صباحًا');
-    } else if (timeString.includes('م')) {
-      timeString = timeString.replace('م', 'مساءً');
-    }
-    return timeString;
+    return time.toLocaleTimeString('ar-EG', { hour: 'numeric', minute: 'numeric', second: 'numeric' });
   }
 
   const fajr = formatTime(prayerTimes.fajr);
