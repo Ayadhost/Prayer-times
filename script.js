@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // إعدادات حساب الصلاة مع الزوايا
     const params = adhan.CalculationMethod.Other(); 
-    params.fajrAngle = 16; // زاوية الفجر للمذهب الجعفري
+    params.fajrAngle = 18; // زاوية الفجر للمذهب الجعفري
     params.ishaAngle = 14; // زاوية العشاء للمذهب الجعفري
 
     const date = new Date();
