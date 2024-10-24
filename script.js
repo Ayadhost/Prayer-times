@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // إعدادات الزاوية لحساب أوقات الصلاة
     const params = adhan.CalculationMethod.MuslimWorldLeague();
     params.fajrAngle = 18;  // زاوية الفجر
-    params.ishaAngle = 17;  // زاوية العشاء
+    params.ishaAngle = 14;  // زاوية العشاء
 
     // تنسيق الوقت بدون ثواني وبنظام 12 ساعة
     function formatTime(date) {
