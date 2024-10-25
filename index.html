@@ -75,6 +75,17 @@
         <td>
             <svg class="clock" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
+                <line id="sunrise-hour" x1="50" y1="50" x2="50" y2="30" stroke="white" stroke-width="2"/>
+                <line id="sunrise-minute" x1="50" y1="50" x2="50" y2="20" stroke="white" stroke-width="2"/>
+            </svg>
+        </td>
+        <td>الشروق</td>
+        <td id="sunrise-time"></td>
+    </tr>
+    <tr>
+        <td>
+            <svg class="clock" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
                 <line id="dhuhr-hour" x1="50" y1="50" x2="50" y2="30" stroke="white" stroke-width="2"/>
                 <line id="dhuhr-minute" x1="50" y1="50" x2="50" y2="20" stroke="white" stroke-width="2"/>
             </svg>
@@ -82,7 +93,28 @@
         <td>الظهر</td>
         <td id="dhuhr-time"></td>
     </tr>
-    <!-- تكرار نفس النموذج لبقية الأوقات (العصر، المغرب، العشاء) -->
+    <tr>
+        <td>
+            <svg class="clock" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
+                <line id="maghrib-hour" x1="50" y1="50" x2="50" y2="30" stroke="white" stroke-width="2"/>
+                <line id="maghrib-minute" x1="50" y1="50" x2="50" y2="20" stroke="white" stroke-width="2"/>
+            </svg>
+        </td>
+        <td>الغروب</td>
+        <td id="maghrib-time"></td>
+    </tr>
+    <tr>
+        <td>
+            <svg class="clock" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
+                <line id="isha-hour" x1="50" y1="50" x2="50" y2="30" stroke="white" stroke-width="2"/>
+                <line id="isha-minute" x1="50" y1="50" x2="50" y2="20" stroke="white" stroke-width="2"/>
+            </svg>
+        </td>
+        <td>العشاء</td>
+        <td id="isha-time"></td>
+    </tr>
 </table>
 
 <label for="location">حدد المحافظة:</label>
@@ -111,8 +143,6 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        console.log("بدء تنفيذ الشيفرة");
-
         const locationSelect = document.getElementById("location");
         let coordinates = new adhan.Coordinates(33.3152, 44.3661);
 
@@ -129,10 +159,16 @@
             const prayerTimes = new adhan.PrayerTimes(coords, date, params);
 
             document.getElementById("fajr-time").textContent = toArabicNumbers(formatTime(prayerTimes.fajr));
+            document.getElementById("sunrise-time").textContent = toArabicNumbers(formatTime(prayerTimes.sunrise));
             document.getElementById("dhuhr-time").textContent = toArabicNumbers(formatTime(prayerTimes.dhuhr));
+            document.getElementById("maghrib-time").textContent = toArabicNumbers(formatTime(prayerTimes.maghrib));
+            document.getElementById("isha-time").textContent = toArabicNumbers(formatTime(prayerTimes.isha));
 
             setClockTime("fajr", prayerTimes.fajr);
+            setClockTime("sunrise", prayerTimes.sunrise);
             setClockTime("dhuhr", prayerTimes.dhuhr);
+            setClockTime("maghrib", prayerTimes.maghrib);
+            setClockTime("isha", prayerTimes.isha);
         }
 
         function formatTime(date) {
@@ -148,11 +184,9 @@
             const hours = date.getHours();
             const minutes = date.getMinutes();
             
-            // حساب الزوايا لعقارب الساعة
             const hourAngle = (hours % 12) * 30 + (0.5 * minutes);
             const minuteAngle = minutes * 6;
 
-            // تحديث زاوية عقارب الساعة بناءً على الوقت
             document.getElementById(`${prayer}-hour`).setAttribute("transform", `rotate(${hourAngle} 50 50)`);
             document.getElementById(`${prayer}-minute`).setAttribute("transform", `rotate(${minuteAngle} 50 50)`);
         }
