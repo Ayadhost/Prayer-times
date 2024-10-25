@@ -63,6 +63,21 @@
             font-size: 1.8rem;
             color: #ffffff;
         }
+
+        /* Media Query لتعديل التصميم على الشاشات الصغيرة */
+        @media (max-width: 600px) { 
+            table { 
+                width: 90%; /* توسيع عرض الجدول ليشمل 90% من الشاشة على الهواتف */ 
+            } 
+            th, td { 
+                font-size: 1.4rem; /* تقليل حجم الخط للنص داخل الخلايا */
+                padding: 10px; /* تقليل الحواف لضمان التباعد المناسب */
+            }
+            .clock { 
+                width: 40px; /* تصغير حجم رمز الساعة للتناسب مع الخلايا الصغيرة */
+                height: 40px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -135,9 +150,24 @@
 
 <label for="location">حدد المحافظة:</label>
 <select id="location" class="location-select">
-    <!-- قائمة المحافظات هنا -->
     <option value="33.3152,44.3661">بغداد</option>
-    <!-- بقية المحافظات ... -->
+    <option value="31.9985,44.3356">كربلاء</option>
+    <option value="32.0351,44.3626">النجف</option>
+    <option value="32.4646,45.9392">الديوانية</option>
+    <option value="36.335,43.1189">الموصل</option>
+    <option value="30.5085,47.7814">البصرة</option>
+    <option value="33.325,44.65">بابل</option>
+    <option value="32.492,44.426">الناصرية</option>
+    <option value="34.636,43.672">الأنبار</option>
+    <option value="31.431,47.701">ميسان</option>
+    <option value="34.192,43.874">صلاح الدين</option>
+    <option value="36.19,44.01">أربيل</option>
+    <option value="35.468,45.403">السليمانية</option>
+    <option value="37.097,42.784">دهوك</option>
+    <option value="35.551,44.356">كركوك</option>
+    <option value="32.469,45.876">المثنى</option>
+    <option value="32.2322,45.0669">واسط</option>
+    <option value="33.7444,44.6172">ديالى</option>
 </select>
 
 <script src="adhan.umd.min.js"></script>
