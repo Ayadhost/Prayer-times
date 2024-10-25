@@ -129,12 +129,11 @@
         document.getElementById("maghrib-time").textContent = toArabicNumbers(formatTime(prayerTimes.maghrib));
         document.getElementById("isha-time").textContent = toArabicNumbers(formatTime(prayerTimes.isha));
 
-اياد المالكي, [2024-10-25 4:21 AM]
-// دالة تنسيق الوقت لعرض الساعات والدقائق فقط مع نقطتين بينهما
+        // دالة تنسيق الوقت لعرض الساعات والدقائق فقط مع نقطتين بينهما
         function formatTime(date) {
             const hours = date.getHours();
             const minutes = date.getMinutes();
-            const displayHours = (hours % 12)  12; // تحويل إلى نظام 12 ساعة
+            const displayHours = (hours % 12) || 12; // تحويل إلى نظام 12 ساعة
             const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
             const ampm = hours >= 12 ? 'مساءً' : 'صباحًا';
             return `${displayHours}:${displayMinutes} ${ampm}`;
@@ -158,12 +157,12 @@
             const ampm = hours >= 12 ? 'مساءً' : 'صباحًا';
             
             // تحويل الساعات إلى نظام 12 ساعة
-            const displayHours = hours % 12  12;
+            const displayHours = hours % 12 || 12;
             const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
             const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
             
             // تنسيق التاريخ والوقت مع الفواصل "/"
-            const formattedDateTime = ${dayName} ${year}/${month}/${day} ${displayHours}:${displayMinutes}:${displaySeconds} ${ampm};
+            const formattedDateTime = `${dayName} ${year}/${month}/${day} ${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
             
             // تحويل الأرقام إلى الأرقام الهندية
             const formattedDateTimeArabic = toArabicNumbers(formattedDateTime);
