@@ -50,24 +50,26 @@
         }
         .icon {
             font-size: 2.5rem;
-            color: #4CAF50;
+            color: #4CAF50; /* لا تغيير في حجم الأيقونات */
         }
         td:last-child {
             color: #f0f0f0;
         }
+
         /* Media Query للهواتف لتوسيع المساحة وتقليل حجم النص */
         @media (max-width: 600px) {
             table {
-                width: 90%;
+                width: 90%; /* زيادة عرض الجدول */
             }
             th, td {
-                font-size: 1.4rem;
-                padding: 15px;
+                font-size: 1.4rem; /* تقليل حجم النص قليلاً */
+                padding: 15px; /* تقليل الحواف */
             }
             .icon {
-                font-size: 2rem;
+                font-size: 2rem; /* تقليل حجم الأيقونات */
             }
         }
+
         /* تنسيق قائمة المحافظات */
         .location-select {
             margin: 20px auto;
@@ -75,6 +77,7 @@
             padding: 10px;
             width: 50%;
         }
+
         label {
             font-size: 1.8rem;
             color: #ffffff;
@@ -183,26 +186,8 @@
             document.querySelector("h1").textContent = "أوقات الصلاة في " + this.options[this.selectedIndex].text;
         });
 
-        // دالة تحديث الوقت الفعلي
-        function updateDateTime() {
-            const currentDateTime = new Date();
-            const hours = currentDateTime.getHours();
-            const minutes = currentDateTime.getMinutes();
-            const seconds = currentDateTime.getSeconds();
-            const ampm = hours >= 12 ? 'م' : 'ص';
-
-            const displayHours = hours % 12 || 12;
-            const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
-            const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
-
-            const formattedTime = `${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
-            const formattedTimeArabic = formattedTime.replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
-
-            document.getElementById("current-date-time").textContent = formattedTimeArabic;
-        }
-
-        setInterval(updateDateTime, 1000);
-        updateDateTime();
+        // استدعاء أوقات الصلاة عند التحميل
+        updatePrayerTimes(coordinates);
     });
 </script>
 </body>
