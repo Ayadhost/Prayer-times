@@ -13,9 +13,6 @@
             color: #ffffff;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
         h1 {
             margin: 20px 0;
@@ -23,6 +20,11 @@
         }
         #current-date-time {
             font-size: 2rem;
+            color: #bbbbbb;
+            margin-bottom: 10px;
+        }
+        #additional-text {
+            font-size: 1.5rem;
             color: #bbbbbb;
             margin-bottom: 30px;
         }
@@ -66,12 +68,6 @@
             font-size: 1.8rem;
             color: #ffffff;
         }
-        #footer-text {
-            font-size: 1.5rem;
-            color: #ffd700; /* اللون الأصفر */
-            margin-top: auto;
-            padding: 10px;
-        }
 
         /* Media Query لتعديل التصميم على الشاشات الصغيرة */
         @media (max-width: 600px) { 
@@ -93,11 +89,11 @@
 
 <h1>أوقات الصلاة في بغداد</h1>
 <div id="current-date-time">جاري تحميل الوقت الفعلي...</div>
+<div id="additional-text">مواقيت الصلاة لمكتب الشهيد السيد محمد الصدر (قدس سره)</div>
 
 <table>
     <tr>
         <td>
-            <!-- رمز ساعة الفجر -->
             <svg class="clock" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
                 <line id="fajr-hour" x1="50" y1="50" x2="50" y2="30" stroke="white" stroke-width="2"/>
@@ -109,7 +105,6 @@
     </tr>
     <tr>
         <td>
-            <!-- رمز ساعة الشروق -->
             <svg class="clock" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
                 <line id="sunrise-hour" x1="50" y1="50" x2="50" y2="30" stroke="white" stroke-width="2"/>
@@ -121,7 +116,6 @@
     </tr>
     <tr>
         <td>
-            <!-- رمز ساعة الظهر -->
             <svg class="clock" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
                 <line id="dhuhr-hour" x1="50" y1="50" x2="50" y2="30" stroke="white" stroke-width="2"/>
@@ -133,7 +127,6 @@
     </tr>
     <tr>
         <td>
-            <!-- رمز ساعة الغروب -->
             <svg class="clock" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
                 <line id="maghrib-hour" x1="50" y1="50" x2="50" y2="30" stroke="white" stroke-width="2"/>
@@ -145,7 +138,6 @@
     </tr>
     <tr>
         <td>
-            <!-- رمز ساعة العشاء -->
             <svg class="clock" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
                 <line id="isha-hour" x1="50" y1="50" x2="50" y2="30" stroke="white" stroke-width="2"/>
@@ -178,8 +170,6 @@
     <option value="32.2322,45.0669">واسط</option>
     <option value="33.7444,44.6172">ديالى</option>
 </select>
-
-<div id="footer-text">مواقيت الصلاة لمكتب الشهيد السيد محمد الصدر (قدس سره)</div>
 
 <script src="adhan.umd.min.js"></script>
 <script>
