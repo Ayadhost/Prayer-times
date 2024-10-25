@@ -19,12 +19,12 @@
             font-size: 2.5rem;
         }
         #current-date-time {
-            font-size: 2rem;
+            font-size: 2rem; /* تكبير الخط */
             color: #bbbbbb;
             margin-bottom: 30px;
         }
         table {
-            width: 85%;
+            width: 70%;
             margin: 40px auto;
             border-collapse: collapse;
             background-color: #333;
@@ -36,7 +36,6 @@
             border-bottom: 1px solid #444;
             font-size: 1.6rem;
             color: #ffffff;
-            white-space: nowrap;
         }
         td {
             position: relative;
@@ -56,26 +55,33 @@
         td:last-child {
             color: #f0f0f0;
         }
+
+        /* تكبير حجم القائمة المنبثقة */
         select {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        /* Media Query للهواتف لتوسيع المساحة وتقليل حجم النص */
+        @media (max-width: 600px) {
+            table {
+                width: 90%; /* زيادة عرض الجدول */
+            }
+            th, td {
+                font-size: 1.4rem; /* تقليل حجم النص قليلاً */
+                padding: 15px; /* تقليل الحواف */
+            }
+            .icon {
+                font-size: 2rem; /* تقليل حجم الأيقونات */
+            }
         }
     </style>
 </head>
 <body>
 
 <h1 id="city-name">أوقات الصلاة في بغداد</h1>
-<div id="current-date-time"></div>
-
-<!-- قائمة المنبثقة لاختيار المحافظة -->
-<select id="city-select">
-    <option value="Baghdad" data-lat="33.3152" data-lng="44.3661">بغداد</option>
-    <option value="Basra" data-lat="30.5086" data-lng="47.7836">البصرة</option>
-    <option value="Mosul" data-lat="36.34" data-lng="43.13">الموصل</option>
-    <option value="Najaf" data-lat="31.99" data-lng="44.33">النجف</option>
-    <option value="Erbil" data-lat="36.19" data-lng="44.01">أربيل</option>
-    <!-- يمكنك إضافة المزيد من المحافظات هنا -->
-</select>
+<div id="current-date-time"></div> <!-- حقل عرض التاريخ والوقت -->
 
 <table>
     <tr>
@@ -104,6 +110,15 @@
         <td id="isha-time"></td>
     </tr>
 </table>
+
+<!-- القائمة المنبثقة لاختيار المدينة -->
+<select id="city-select">
+    <option value="Baghdad" data-lat="33.3152" data-lng="44.3661">بغداد</option>
+    <option value="Basra" data-lat="30.5086" data-lng="47.7836">البصرة</option>
+    <option value="Mosul" data-lat="36.34" data-lng="43.13">الموصل</option>
+    <option value="Najaf" data-lat="31.99" data-lng="44.33">النجف</option>
+    <option value="Erbil" data-lat="36.19" data-lng="44.01">أربيل</option>
+</select>
 
 <script src="adhan.umd.min.js"></script>
 <script>
