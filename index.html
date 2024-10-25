@@ -67,7 +67,7 @@
         /* تنسيق السطر النصي الإضافي */
         #footer-text {
             font-size: 1.5rem;
-            color: #00bfff; /* لون أزرق يناسب الخلفية */
+            color: #00bfff;
             margin-top: 10px;
         }
 
@@ -85,7 +85,7 @@
                 height: 40px;
             }
             #footer-text {
-                font-size: 1.2rem; /* تصغير الخط للشاشات الصغيرة */
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -96,10 +96,63 @@
 <div id="current-date-time">جاري تحميل الوقت الفعلي...</div>
 
 <table>
-    <!-- باقي الجدول الخاص بأوقات الصلاة هنا -->
+    <tr>
+        <td>
+            <svg class="clock" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
+                <line id="fajr-hour" x1="50" y1="50" x2="50" y2="30" stroke="white" stroke-width="2"/>
+                <line id="fajr-minute" x1="50" y1="50" x2="50" y2="20" stroke="white" stroke-width="2"/>
+            </svg>
+        </td>
+        <td>الفجر</td>
+        <td id="fajr-time"></td>
+    </tr>
+    <tr>
+        <td>
+            <svg class="clock" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
+                <line id="sunrise-hour" x1="50" y1="50" x2="50" y2="30" stroke="white" stroke-width="2"/>
+                <line id="sunrise-minute" x1="50" y1="50" x2="50" y2="20" stroke="white" stroke-width="2"/>
+            </svg>
+        </td>
+        <td>الشروق</td>
+        <td id="sunrise-time"></td>
+    </tr>
+    <tr>
+        <td>
+            <svg class="clock" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
+                <line id="dhuhr-hour" x1="50" y1="50" x2="50" y2="30" stroke="white" stroke-width="2"/>
+                <line id="dhuhr-minute" x1="50" y1="50" x2="50" y2="20" stroke="white" stroke-width="2"/>
+            </svg>
+        </td>
+        <td>الظهر</td>
+        <td id="dhuhr-time"></td>
+    </tr>
+    <tr>
+        <td>
+            <svg class="clock" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
+                <line id="maghrib-hour" x1="50" y1="50" x2="50" y2="30" stroke="white" stroke-width="2"/>
+                <line id="maghrib-minute" x1="50" y1="50" x2="50" y2="20" stroke="white" stroke-width="2"/>
+            </svg>
+        </td>
+        <td>المغرب</td>
+        <td id="maghrib-time"></td>
+    </tr>
+    <tr>
+        <td>
+            <svg class="clock" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
+                <line id="isha-hour" x1="50" y1="50" x2="50" y2="30" stroke="white" stroke-width="2"/>
+                <line id="isha-minute" x1="50" y1="50" x2="50" y2="20" stroke="white" stroke-width="2"/>
+            </svg>
+        </td>
+        <td>العشاء</td>
+        <td id="isha-time"></td>
+    </tr>
 </table>
 
-<!-- اختيار المحافظة -->
 <label for="location">حدد المحافظة:</label>
 <select id="location" class="location-select">
     <option value="33.3152,44.3661">بغداد</option>
@@ -122,12 +175,81 @@
     <option value="33.7444,44.6172">ديالى</option>
 </select>
 
-<!-- السطر النصي الإضافي -->
 <div id="footer-text">مواقيت الصلاة لمكتب الشهيد السيد محمد الصدر (قدس سره)</div>
 
 <script src="adhan.umd.min.js"></script>
 <script>
-// كود الجافا سكريبت لتحديث أوقات الصلاة ووقت الساعة
+document.addEventListener("DOMContentLoaded", function() {
+    const locationSelect = document.getElementById("location");
+    let coordinates = new adhan.Coordinates(33.3152, 44.3661);
+    const params = adhan.CalculationMethod.Other();
+    params.fajrAngle = 18;
+    params.ishaAngle = 4;
+
+    function toArabicNumbers(num) {
+        return num.replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
+    }
+
+    function updatePrayerTimes(coords) {
+        const date = new Date();
+        const prayerTimes = new adhan.PrayerTimes(coords, date, params);
+
+        document.getElementById("fajr-time").textContent = toArabicNumbers(formatTime(prayerTimes.fajr));
+        document.getElementById("sunrise-time").textContent = toArabicNumbers(formatTime(prayerTimes.sunrise));
+        document.getElementById("dhuhr-time").textContent = toArabicNumbers(formatTime(prayerTimes.dhuhr));
+        document.getElementById("maghrib-time").textContent = toArabicNumbers(formatTime(prayerTimes.maghrib));
+        document.getElementById("isha-time").textContent = toArabicNumbers(formatTime(prayerTimes.isha));
+
+        setClockTime("fajr", prayerTimes.fajr);
+        setClockTime("sunrise", prayerTimes.sunrise);
+        setClockTime("dhuhr", prayerTimes.dhuhr);
+        setClockTime("maghrib", prayerTimes.maghrib);
+        setClockTime("isha", prayerTimes.isha);
+    }
+
+    function formatTime(date) {
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const displayHours = (hours % 12) || 12;
+        const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+        const ampm = hours >= 12 ? 'م' : 'ص';
+        return `${displayHours}:${displayMinutes} ${ampm}`;
+    }
+
+    function setClockTime(prayer, date) {
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        
+        const hourAngle = (hours % 12) * 30 + (0.5 * minutes);
+        const minuteAngle = minutes * 6;
+
+        document.getElementById(`${prayer}-hour`).setAttribute("transform", `rotate(${hourAngle} 50 50)`);
+        document.getElementById(`${prayer}-minute`).setAttribute("transform", `rotate(${minuteAngle} 50 50)`);
+    }
+
+    locationSelect.addEventListener("change", function() {
+        const [lat, lon] = this.value.split(",");
+        coordinates = new adhan.Coordinates(parseFloat(lat), parseFloat(lon));
+        updatePrayerTimes(coordinates);
+        document.querySelector("h1").textContent = "أوقات الصلاة في " + this.options[this.selectedIndex].text;
+    });
+
+    updatePrayerTimes(coordinates);
+
+    function updateCurrentDateTime() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        const displayHours = (hours % 12) || 12;
+        const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+        const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
+        const ampm = hours >= 12 ? 'مساءً' : 'صباحًا';
+        document.getElementById("current-date-time").textContent = toArabicNumbers(`${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`);
+    }
+
+    setInterval(updateCurrentDateTime, 1000);
+});
 </script>
 
 </body>
