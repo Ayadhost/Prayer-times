@@ -16,10 +16,10 @@
         }
         h1 {
             margin: 20px 0;
-            font-size: 2rem; /* تصغير حجم العنوان */
+            font-size: 2rem;
         }
         #current-date-time {
-            font-size: 2rem; /* تكبير الخط */
+            font-size: 2rem;
             color: #bbbbbb;
             margin-bottom: 30px;
         }
@@ -34,7 +34,7 @@
             padding: 20px;
             text-align: center;
             border-bottom: 1px solid #444;
-            font-size: 2rem; /* تكبير حجم النص في الحقول */
+            font-size: 2rem;
             color: #ffffff;
         }
         td {
@@ -50,27 +50,25 @@
         }
         .icon {
             font-size: 2.5rem;
-            color: #4CAF50; /* لا تغيير في حجم الأيقونات */
+            color: #4CAF50;
         }
         td:last-child {
             color: #f0f0f0;
         }
 
-        /* Media Query للهواتف لتوسيع المساحة وتقليل حجم النص */
         @media (max-width: 600px) {
             table {
-                width: 90%; /* زيادة عرض الجدول */
+                width: 90%;
             }
             th, td {
-                font-size: 1.4rem; /* تقليل حجم النص قليلاً */
-                padding: 15px; /* تقليل الحواف */
+                font-size: 1.4rem;
+                padding: 15px;
             }
             .icon {
-                font-size: 2rem; /* تقليل حجم الأيقونات */
+                font-size: 2rem;
             }
         }
 
-        /* تنسيق قائمة المحافظات */
         .location-select {
             margin: 20px auto;
             font-size: 1.6rem;
@@ -87,7 +85,7 @@
 <body>
 
 <h1>أوقات الصلاة في بغداد</h1>
-<div id="current-date-time">جاري تحميل الوقت الفعلي...</div> <!-- حقل عرض الوقت الفعلي -->
+<div id="current-date-time">جاري تحميل الوقت الفعلي...</div>
 
 <table>
     <tr>
@@ -117,7 +115,6 @@
     </tr>
 </table>
 
-<!-- قائمة اختيار المحافظة -->
 <label for="location">حدد المحافظة:</label>
 <select id="location" class="location-select">
     <option value="33.3152,44.3661">بغداد</option>
@@ -126,31 +123,20 @@
     <option value="32.4646,45.9392">الديوانية</option>
     <option value="36.335,43.1189">الموصل</option>
     <option value="30.5085,47.7814">البصرة</option>
-    <option value="33.325,44.65">بابل</option>
-    <option value="32.492,44.426">الناصرية</option>
-    <option value="34.636,43.672">الأنبار</option>
-    <option value="31.431,47.701">ميسان</option>
-    <option value="34.192,43.874">صلاح الدين</option>
-    <option value="36.19,44.01">أربيل</option>
-    <option value="35.468,45.403">السليمانية</option>
-    <option value="37.097,42.784">دهوك</option>
-    <option value="35.551,44.356">كركوك</option>
-    <option value="32.469,45.876">المثنى</option>
 </select>
 
-<script src="adhan.umd.min.js"></script> <!-- تأكد من أن المسار صحيح -->
+<script src="adhan.umd.min.js"></script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        console.log("صفحة محملة بالكامل، يتم الآن تحديث الوقت الفعلي وأوقات الصلاة...");
+        console.log("بدء تنفيذ الشيفرة");
 
         const locationSelect = document.getElementById("location");
-        let coordinates = new adhan.Coordinates(33.3152, 44.3661); // إحداثيات بغداد
+        let coordinates = new adhan.Coordinates(33.3152, 44.3661);
 
-        // إعدادات حساب الصلاة مع الزوايا
-        const params = adhan.CalculationMethod.Other(); 
-        params.fajrAngle = 18; // زاوية الفجر للمذهب الجعفري
-        params.ishaAngle = 4; // زاوية العشاء للمذهب الجعفري
+        const params = adhan.CalculationMethod.Other();
+        params.fajrAngle = 18;
+        params.ishaAngle = 4;
 
         function toArabicNumbers(num) {
             return num.replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
@@ -198,9 +184,12 @@
             const ampm = hours >= 12 ? 'مساءً' : 'صباحًا';
             const timeString = `${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
             document.getElementById("current-date-time").textContent = toArabicNumbers(timeString);
-            console.log("Current Time:", timeString);
+            console.log("الوقت الحالي:", timeString);
         }
 
         setInterval(updateCurrentDateTime, 1000);
     });
-</script
+</script>
+
+</body>
+</html>
