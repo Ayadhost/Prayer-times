@@ -125,11 +125,15 @@
             return `${displayHours}:${displayMinutes} ${ampm}`;
         }
 
+        // أسماء الأيام باللغة العربية
+        const daysOfWeek = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+
         // تحديث التاريخ والوقت الحالي مع اليوم والفاصل بنمط 2024/10/25
         function updateDateTime() {
             const currentDateTime = new Date();
             
-            // الحصول على أجزاء التاريخ
+            // الحصول على اليوم والتاريخ
+            const dayName = daysOfWeek[currentDateTime.getDay()]; // الحصول على اسم اليوم
             const day = currentDateTime.getDate();
             const month = currentDateTime.getMonth() + 1; // getMonth() تعطي الشهور من 0 إلى 11، لذلك نضيف 1
             const year = currentDateTime.getFullYear();
@@ -144,7 +148,7 @@
             const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
             
             // تنسيق التاريخ والوقت مع الفواصل "/"
-            const formattedDateTime = `${year}/${month}/${day} ${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
+            const formattedDateTime = `${dayName} ${year}/${month}/${day} ${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
             
             // تحويل الأرقام إلى الأرقام الهندية
             const formattedDateTimeArabic = toArabicNumbers(formattedDateTime);
