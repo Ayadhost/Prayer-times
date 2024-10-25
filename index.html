@@ -74,7 +74,7 @@
 <body>
 
 <h1>أوقات الصلاة في بغداد</h1>
-<div id="current-date-time"></div> <!-- حقل عرض التاريخ والوقت -->
+<div id="current-date-time"></div> <!-- حقل عرض الوقت الفعلي -->
 
 <table>
     <tr>
@@ -139,18 +139,11 @@
             return `${displayHours}:${displayMinutes} ${ampm}`;
         }
 
-        // أسماء الأيام باللغة العربية
-        const daysOfWeek = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
-
-        // تحديث التاريخ والوقت الحالي مع اليوم والفاصل بنمط 2024/10/25
+        // تحديث الوقت الفعلي بدون التاريخ
         function updateDateTime() {
             const currentDateTime = new Date();
             
-            // الحصول على اليوم والتاريخ
-            const dayName = daysOfWeek[currentDateTime.getDay()]; // الحصول على اسم اليوم
-            const day = currentDateTime.getDate();
-            const month = currentDateTime.getMonth() + 1; // getMonth() تعطي الشهور من 0 إلى 11، لذلك نضيف 1
-            const year = currentDateTime.getFullYear();
+            // الحصول على الوقت
             const hours = currentDateTime.getHours();
             const minutes = currentDateTime.getMinutes();
             const seconds = currentDateTime.getSeconds();
@@ -161,14 +154,14 @@
             const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
             const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
             
-            // تنسيق التاريخ والوقت مع الفواصل "/"
-            const formattedDateTime = `${dayName} ${year}/${month}/${day} ${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
+            // تنسيق الوقت فقط بدون التاريخ
+            const formattedTime = `${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
             
             // تحويل الأرقام إلى الأرقام الهندية
-            const formattedDateTimeArabic = toArabicNumbers(formattedDateTime);
+            const formattedTimeArabic = toArabicNumbers(formattedTime);
 
             // تحديث النص
-            document.getElementById("current-date-time").textContent = formattedDateTimeArabic;
+            document.getElementById("current-date-time").textContent = formattedTimeArabic;
         }
 
         // استدعاء الدالة عند التحميل وتحديث الوقت كل ثانية
