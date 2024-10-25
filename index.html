@@ -19,12 +19,12 @@
             font-size: 2.5rem;
         }
         #current-date-time {
-            font-size: 2rem; /* تكبير الخط */
+            font-size: 2rem;
             color: #bbbbbb;
             margin-bottom: 30px;
         }
         table {
-            width: 70%;
+            width: 85%;
             margin: 40px auto;
             border-collapse: collapse;
             background-color: #333;
@@ -36,6 +36,7 @@
             border-bottom: 1px solid #444;
             font-size: 1.6rem;
             color: #ffffff;
+            white-space: nowrap;
         }
         td {
             position: relative;
@@ -55,26 +56,26 @@
         td:last-child {
             color: #f0f0f0;
         }
-
-        /* Media Query للهواتف لتوسيع المساحة وتقليل حجم النص */
-        @media (max-width: 600px) {
-            table {
-                width: 90%; /* زيادة عرض الجدول */
-            }
-            th, td {
-                font-size: 1.4rem; /* تقليل حجم النص قليلاً */
-                padding: 15px; /* تقليل الحواف */
-            }
-            .icon {
-                font-size: 2rem; /* تقليل حجم الأيقونات */
-            }
+        select {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
-<h1>أوقات الصلاة في بغداد</h1>
-<div id="current-date-time"></div> <!-- حقل عرض التاريخ والوقت -->
+<h1 id="city-name">أوقات الصلاة في بغداد</h1>
+<div id="current-date-time"></div>
+
+<!-- قائمة المنبثقة لاختيار المحافظة -->
+<select id="city-select">
+    <option value="Baghdad" data-lat="33.3152" data-lng="44.3661">بغداد</option>
+    <option value="Basra" data-lat="30.5086" data-lng="47.7836">البصرة</option>
+    <option value="Mosul" data-lat="36.34" data-lng="43.13">الموصل</option>
+    <option value="Najaf" data-lat="31.99" data-lng="44.33">النجف</option>
+    <option value="Erbil" data-lat="36.19" data-lng="44.01">أربيل</option>
+    <!-- يمكنك إضافة المزيد من المحافظات هنا -->
+</select>
 
 <table>
     <tr>
@@ -107,74 +108,51 @@
 <script src="adhan.umd.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const coordinates = new adhan.Coordinates(33.3152, 44.3661); // إحداثيات بغداد
+        const citySelect = document.getElementById('city-select');
+        const cityName = document.getElementById('city-name');
+        
+        // دالة لتحميل أوقات الصلاة بناءً على الإحداثيات
+        function loadPrayerTimes(lat, lng) {
+            const coordinates = new adhan.Coordinates(lat, lng);
+            const params = adhan.CalculationMethod.Other(); 
+            params.fajrAngle = 18; // زاوية الفجر للمذهب الجعفري
+            params.ishaAngle = 4;  // زاوية العشاء للمذهب الجعفري
 
-        // إعدادات حساب الصلاة مع الزوايا
-        const params = adhan.CalculationMethod.Other(); 
-        params.fajrAngle = 18; // زاوية الفجر للمذهب الجعفري
-        params.ishaAngle = 4; // زاوية العشاء للمذهب الجعفري
+            const date = new Date();
+            const prayerTimes = new adhan.PrayerTimes(coordinates, date, params);
 
-        const date = new Date();
-        const prayerTimes = new adhan.PrayerTimes(coordinates, date, params);
-
-        // تحويل الأرقام إلى الأرقام الهندية
-        function toArabicNumbers(num) {
-            return num.replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
+            // عرض الأوقات
+            document.getElementById("fajr-time").textContent = formatTime(prayerTimes.fajr);
+            document.getElementById("sunrise-time").textContent = formatTime(prayerTimes.sunrise);
+            document.getElementById("dhuhr-time").textContent = formatTime(prayerTimes.dhuhr);
+            document.getElementById("maghrib-time").textContent = formatTime(prayerTimes.maghrib);
+            document.getElementById("isha-time").textContent = formatTime(prayerTimes.isha);
         }
 
-        // عرض أوقات الصلاة في العناصر المناسبة
-        document.getElementById("fajr-time").textContent = toArabicNumbers(formatTime(prayerTimes.fajr));
-        document.getElementById("sunrise-time").textContent = toArabicNumbers(formatTime(prayerTimes.sunrise));
-        document.getElementById("dhuhr-time").textContent = toArabicNumbers(formatTime(prayerTimes.dhuhr));
-        document.getElementById("maghrib-time").textContent = toArabicNumbers(formatTime(prayerTimes.maghrib));
-        document.getElementById("isha-time").textContent = toArabicNumbers(formatTime(prayerTimes.isha));
-
-        // دالة تنسيق الوقت لعرض الساعات والدقائق فقط مع نقطتين بينهما
+        // دالة لتنسيق الوقت
         function formatTime(date) {
             const hours = date.getHours();
             const minutes = date.getMinutes();
-            const displayHours = (hours % 12) || 12; // تحويل إلى نظام 12 ساعة
+            const displayHours = (hours % 12) || 12;
             const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
-            const ampm = hours >= 12 ? 'مساءً' : 'صباحًا';
+            const ampm = hours >= 12 ? 'م' : 'ص';
             return `${displayHours}:${displayMinutes} ${ampm}`;
         }
 
-        // أسماء الأيام باللغة العربية
-        const daysOfWeek = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+        // عند تغيير المحافظة
+        citySelect.addEventListener('change', function() {
+            const selectedCity = citySelect.options[citySelect.selectedIndex];
+            const lat = selectedCity.getAttribute('data-lat');
+            const lng = selectedCity.getAttribute('data-lng');
+            const city = selectedCity.value;
+            cityName.textContent = `أوقات الصلاة في ${city}`;
+            loadPrayerTimes(lat, lng);
+        });
 
-        // تحديث التاريخ والوقت الحالي مع اليوم والفاصل بنمط 2024/10/25
-        function updateDateTime() {
-            const currentDateTime = new Date();
-            
-            // الحصول على اليوم والتاريخ
-            const dayName = daysOfWeek[currentDateTime.getDay()]; // الحصول على اسم اليوم
-            const day = currentDateTime.getDate();
-            const month = currentDateTime.getMonth() + 1; // getMonth() تعطي الشهور من 0 إلى 11، لذلك نضيف 1
-            const year = currentDateTime.getFullYear();
-            const hours = currentDateTime.getHours();
-            const minutes = currentDateTime.getMinutes();
-            const seconds = currentDateTime.getSeconds();
-            const ampm = hours >= 12 ? 'مساءً' : 'صباحًا';
-            
-            // تحويل الساعات إلى نظام 12 ساعة
-            const displayHours = hours % 12 || 12;
-            const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
-            const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
-            
-            // تنسيق التاريخ والوقت مع الفواصل "/"
-            const formattedDateTime = `${dayName} ${year}/${month}/${day} ${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
-            
-            // تحويل الأرقام إلى الأرقام الهندية
-            const formattedDateTimeArabic = toArabicNumbers(formattedDateTime);
-
-            // تحديث النص
-            document.getElementById("current-date-time").textContent = formattedDateTimeArabic;
-        }
-
-        // استدعاء الدالة عند التحميل وتحديث الوقت كل ثانية
-        updateDateTime();
-        setInterval(updateDateTime, 1000);
+        // تحميل الأوقات الافتراضية عند تحميل الصفحة
+        loadPrayerTimes(33.3152, 44.3661); // إحداثيات بغداد
     });
 </script>
+
 </body>
 </html>
