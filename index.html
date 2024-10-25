@@ -138,16 +138,55 @@
     <option value="32.469,45.876">المثنى</option>
 </select>
 
+<script src="adhan.umd.min.js"></script> <!-- تأكد من أن المسار صحيح -->
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        console.log("صفحة محملة بالكامل، يتم الآن تحديث الوقت الفعلي...");
+        console.log("صفحة محملة بالكامل، يتم الآن تحديث الوقت الفعلي وأوقات الصلاة...");
 
-        // دالة لتحويل الأرقام إلى الأرقام الهندية
+        const locationSelect = document.getElementById("location");
+        let coordinates = new adhan.Coordinates(33.3152, 44.3661); // إحداثيات بغداد
+
+        // إعدادات حساب الصلاة مع الزوايا
+        const params = adhan.CalculationMethod.Other(); 
+        params.fajrAngle = 18; // زاوية الفجر للمذهب الجعفري
+        params.ishaAngle = 4; // زاوية العشاء للمذهب الجعفري
+
         function toArabicNumbers(num) {
             return num.replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
         }
 
-        // دالة لعرض الوقت الفعلي مع الثواني و"صباحًا" أو "مساءً"
+        function updatePrayerTimes(coordinates) {
+            const date = new Date();
+            const prayerTimes = new adhan.PrayerTimes(coordinates, date, params);
+
+            document.getElementById("fajr-time").textContent = toArabicNumbers(formatTimeWithAmPm(prayerTimes.fajr));
+            document.getElementById("sunrise-time").textContent = toArabicNumbers(formatTimeWithAmPm(prayerTimes.sunrise));
+            document.getElementById("dhuhr-time").textContent = toArabicNumbers(formatTimeWithAmPm(prayerTimes.dhuhr));
+            document.getElementById("maghrib-time").textContent = toArabicNumbers(formatTimeWithAmPm(prayerTimes.maghrib));
+            document.getElementById("isha-time").textContent = toArabicNumbers(formatTimeWithAmPm(prayerTimes.isha));
+
+            console.log("أوقات الصلاة محدثة");
+        }
+
+        function formatTimeWithAmPm(date) {
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+            const displayHours = (hours % 12) || 12;
+            const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+            const ampm = hours >= 12 ? 'م' : 'ص';
+            return `${displayHours}:${displayMinutes} ${ampm}`;
+        }
+
+        locationSelect.addEventListener("change", function() {
+            const [lat, lon] = this.value.split(",");
+            coordinates = new adhan.Coordinates(parseFloat(lat), parseFloat(lon));
+            updatePrayerTimes(coordinates);
+            document.querySelector("h1").textContent = "أوقات الصلاة في " + this.options[this.selectedIndex].text;
+        });
+
+        updatePrayerTimes(coordinates);
+
         function updateCurrentDateTime() {
             const now = new Date();
             const hours = now.getHours();
@@ -159,13 +198,9 @@
             const ampm = hours >= 12 ? 'مساءً' : 'صباحًا';
             const timeString = `${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
             document.getElementById("current-date-time").textContent = toArabicNumbers(timeString);
-            console.log("Current Time:", timeString); // للتحقق من تشغيل الدالة
+            console.log("Current Time:", timeString);
         }
 
-        // استدعاء الدالة وتحديث الوقت كل ثانية
         setInterval(updateCurrentDateTime, 1000);
     });
-</script>
-
-</body>
-</html>
+</script
