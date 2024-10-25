@@ -135,7 +135,7 @@
             const minutes = date.getMinutes();
             const displayHours = (hours % 12) || 12; // تحويل إلى نظام 12 ساعة
             const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
-            const ampm = hours >= 12 ? 'مساءً' : 'صباحًا';
+            const ampm = hours >= 12 ? 'م' : 'ص'; // استبدال "صباحًا" بـ "ص" و"مساءً" بـ "م"
             return `${displayHours}:${displayMinutes} ${ampm}`;
         }
 
