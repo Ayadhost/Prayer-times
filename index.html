@@ -158,20 +158,21 @@
                 return num.replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
             }
 
-            // عرض أوقات الصلاة في العناصر المناسبة بدون الثواني وبدون صباحًا/مساءً
-            document.getElementById("fajr-time").textContent = toArabicNumbers(formatTimeWithoutAmPm(prayerTimes.fajr));
-            document.getElementById("sunrise-time").textContent = toArabicNumbers(formatTimeWithoutAmPm(prayerTimes.sunrise));
-            document.getElementById("dhuhr-time").textContent = toArabicNumbers(formatTimeWithoutAmPm(prayerTimes.dhuhr));
-            document.getElementById("maghrib-time").textContent = toArabicNumbers(formatTimeWithoutAmPm(prayerTimes.maghrib));
-            document.getElementById("isha-time").textContent = toArabicNumbers(formatTimeWithoutAmPm(prayerTimes.isha));
+            // عرض أوقات الصلاة في العناصر المناسبة بدون الثواني مع "ص" و"م"
+            document.getElementById("fajr-time").textContent = toArabicNumbers(formatTimeWithAmPm(prayerTimes.fajr));
+            document.getElementById("sunrise-time").textContent = toArabicNumbers(formatTimeWithAmPm(prayerTimes.sunrise));
+            document.getElementById("dhuhr-time").textContent = toArabicNumbers(formatTimeWithAmPm(prayerTimes.dhuhr));
+            document.getElementById("maghrib-time").textContent = toArabicNumbers(formatTimeWithAmPm(prayerTimes.maghrib));
+            document.getElementById("isha-time").textContent = toArabicNumbers(formatTimeWithAmPm(prayerTimes.isha));
 
-            // دالة تنسيق الوقت بدون صباحًا/مساءً وبدون الثواني
-            function formatTimeWithoutAmPm(date) {
+            // دالة تنسيق الوقت مع "ص" أو "م" وبدون الثواني
+            function formatTimeWithAmPm(date) {
                 const hours = date.getHours();
                 const minutes = date.getMinutes();
                 const displayHours = (hours % 12) || 12; // تحويل إلى نظام 12 ساعة
                 const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
-                return `${displayHours}:${displayMinutes}`;
+                const ampm = hours >= 12 ? 'م' : 'ص'; // اختصارات "م" و"ص"
+                return `${displayHours}:${displayMinutes} ${ampm}`;
             }
         }
 
