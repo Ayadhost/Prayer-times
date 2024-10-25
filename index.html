@@ -188,7 +188,20 @@
 
         // استدعاء أوقات الصلاة عند التحميل
         updatePrayerTimes(coordinates);
+
+        // تحديث التاريخ والوقت الحاليين
+        function updateCurrentDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = now.toLocaleDateString('ar-EG', options);
+            const timeString = now.toLocaleTimeString('ar-EG', { hour: 'numeric', minute: 'numeric', second: 'numeric' });
+            document.getElementById("current-date-time").textContent = `${dateString} - ${timeString}`;
+        }
+
+        // تحديث الوقت كل ثانية
+        setInterval(updateCurrentDateTime, 1000);
     });
 </script>
+
 </body>
 </html>
