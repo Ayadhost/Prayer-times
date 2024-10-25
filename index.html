@@ -55,6 +55,20 @@
         td:last-child {
             color: #f0f0f0;
         }
+
+        /* Media Query للهواتف لتوسيع المساحة وتقليل حجم النص */
+        @media (max-width: 600px) {
+            table {
+                width: 90%; /* زيادة عرض الجدول */
+            }
+            th, td {
+                font-size: 1.4rem; /* تقليل حجم النص قليلاً */
+                padding: 15px; /* تقليل الحواف */
+            }
+            .icon {
+                font-size: 2rem; /* تقليل حجم الأيقونات */
+            }
+        }
     </style>
 </head>
 <body>
