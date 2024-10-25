@@ -24,7 +24,7 @@
             margin-bottom: 30px;
         }
         table {
-            width: 70%;
+            width: 85%; /* تمديد العرض لمنع تداخل الكلمات */
             margin: 40px auto;
             border-collapse: collapse;
             background-color: #333;
@@ -36,6 +36,7 @@
             border-bottom: 1px solid #444;
             font-size: 1.6rem;
             color: #ffffff;
+            white-space: nowrap; /* منع الكلمات من الانتقال إلى السطر التالي */
         }
         td {
             position: relative;
@@ -54,20 +55,6 @@
         }
         td:last-child {
             color: #f0f0f0;
-        }
-
-        /* Media Query للهواتف لتوسيع المساحة وتقليل حجم النص */
-        @media (max-width: 600px) {
-            table {
-                width: 90%; /* زيادة عرض الجدول */
-            }
-            th, td {
-                font-size: 1.4rem; /* تقليل حجم النص قليلاً */
-                padding: 15px; /* تقليل الحواف */
-            }
-            .icon {
-                font-size: 2rem; /* تقليل حجم الأيقونات */
-            }
         }
     </style>
 </head>
@@ -129,32 +116,28 @@
         document.getElementById("maghrib-time").textContent = toArabicNumbers(formatTime(prayerTimes.maghrib));
         document.getElementById("isha-time").textContent = toArabicNumbers(formatTime(prayerTimes.isha));
 
-        // دالة تنسيق الوقت لعرض الساعات والدقائق فقط مع نقطتين بينهما
+        // دالة تنسيق الوقت لعرض الساعات والدقائق فقط مع نقطتين بينهما واستبدال صباحًا ومساءً بـ "ص" و "م"
         function formatTime(date) {
             const hours = date.getHours();
             const minutes = date.getMinutes();
             const displayHours = (hours % 12) || 12; // تحويل إلى نظام 12 ساعة
             const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
-            const ampm = hours >= 12 ? 'مساءً' : 'صباحًا';
+            const ampm = hours >= 12 ? 'م' : 'ص'; // استبدال صباحًا بـ "ص" ومساءً بـ "م"
             return `${displayHours}:${displayMinutes} ${ampm}`;
         }
-
-        // أسماء الأيام باللغة العربية
-        const daysOfWeek = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
 
         // تحديث التاريخ والوقت الحالي مع اليوم والفاصل بنمط 2024/10/25
         function updateDateTime() {
             const currentDateTime = new Date();
             
-            // الحصول على اليوم والتاريخ
-            const dayName = daysOfWeek[currentDateTime.getDay()]; // الحصول على اسم اليوم
+            // الحصول على أجزاء التاريخ
             const day = currentDateTime.getDate();
             const month = currentDateTime.getMonth() + 1; // getMonth() تعطي الشهور من 0 إلى 11، لذلك نضيف 1
             const year = currentDateTime.getFullYear();
             const hours = currentDateTime.getHours();
             const minutes = currentDateTime.getMinutes();
             const seconds = currentDateTime.getSeconds();
-            const ampm = hours >= 12 ? 'مساءً' : 'صباحًا';
+            const ampm = hours >= 12 ? 'م' : 'ص'; // استبدال صباحًا بـ "ص" ومساءً بـ "م"
             
             // تحويل الساعات إلى نظام 12 ساعة
             const displayHours = hours % 12 || 12;
@@ -162,7 +145,7 @@
             const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
             
             // تنسيق التاريخ والوقت مع الفواصل "/"
-            const formattedDateTime = `${dayName} ${year}/${month}/${day} ${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
+            const formattedDateTime = `${year}/${month}/${day} ${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
             
             // تحويل الأرقام إلى الأرقام الهندية
             const formattedDateTimeArabic = toArabicNumbers(formattedDateTime);
