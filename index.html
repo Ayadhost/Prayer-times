@@ -158,23 +158,20 @@
                 return num.replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
             }
 
-            // عرض أوقات الصلاة في العناصر المناسبة
-            document.getElementById("fajr-time").textContent = toArabicNumbers(formatTime(prayerTimes.fajr));
-            document.getElementById("sunrise-time").textContent = toArabicNumbers(formatTime(prayerTimes.sunrise));
-            document.getElementById("dhuhr-time").textContent = toArabicNumbers(formatTime(prayerTimes.dhuhr));
-            document.getElementById("maghrib-time").textContent = toArabicNumbers(formatTime(prayerTimes.maghrib));
-            document.getElementById("isha-time").textContent = toArabicNumbers(formatTime(prayerTimes.isha));
+            // عرض أوقات الصلاة في العناصر المناسبة بدون الثواني وبدون صباحًا/مساءً
+            document.getElementById("fajr-time").textContent = toArabicNumbers(formatTimeWithoutAmPm(prayerTimes.fajr));
+            document.getElementById("sunrise-time").textContent = toArabicNumbers(formatTimeWithoutAmPm(prayerTimes.sunrise));
+            document.getElementById("dhuhr-time").textContent = toArabicNumbers(formatTimeWithoutAmPm(prayerTimes.dhuhr));
+            document.getElementById("maghrib-time").textContent = toArabicNumbers(formatTimeWithoutAmPm(prayerTimes.maghrib));
+            document.getElementById("isha-time").textContent = toArabicNumbers(formatTimeWithoutAmPm(prayerTimes.isha));
 
-            // دالة تنسيق الوقت لعرض الساعات والدقائق والثواني مع نقطتين بينهما
-            function formatTime(date) {
+            // دالة تنسيق الوقت بدون صباحًا/مساءً وبدون الثواني
+            function formatTimeWithoutAmPm(date) {
                 const hours = date.getHours();
                 const minutes = date.getMinutes();
-                const seconds = date.getSeconds();
                 const displayHours = (hours % 12) || 12; // تحويل إلى نظام 12 ساعة
                 const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
-                const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
-                const ampm = hours >= 12 ? 'مساءً' : 'صباحًا'; // استبدال "مساءً" أو "صباحًا"
-                return `${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`;
+                return `${displayHours}:${displayMinutes}`;
             }
         }
 
@@ -191,7 +188,7 @@
         // استدعاء أوقات الصلاة عند التحميل
         updatePrayerTimes(coordinates);
 
-        // تحديث الوقت الحالي فقط بدون اليوم والتاريخ مع عداد الثواني
+        // تحديث الوقت الحالي فقط مع الثواني وعرض صباحًا/مساءً
         function updateCurrentDateTime() {
             const now = new Date();
             const hours = now.getHours();
