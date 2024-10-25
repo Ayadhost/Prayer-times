@@ -171,7 +171,7 @@
                 const minutes = date.getMinutes();
                 const displayHours = (hours % 12) || 12; // تحويل إلى نظام 12 ساعة
                 const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
-                const ampm = hours >= 12 ? 'م' : 'ص'; // استبدال "صباحًا" بـ "ص" و"مساءً" بـ "م"
+                const ampm = hours >= 12 ? 'مساءً' : 'صباحًا'; // استبدال "مساءً" أو "صباحًا"
                 return `${displayHours}:${displayMinutes} ${ampm}`;
             }
         }
@@ -189,13 +189,15 @@
         // استدعاء أوقات الصلاة عند التحميل
         updatePrayerTimes(coordinates);
 
-        // تحديث التاريخ والوقت الحاليين
+        // تحديث الوقت الحالي فقط بدون اليوم والتاريخ
         function updateCurrentDateTime() {
             const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const dateString = now.toLocaleDateString('ar-EG', options);
-            const timeString = now.toLocaleTimeString('ar-EG', { hour: 'numeric', minute: 'numeric', second: 'numeric' });
-            document.getElementById("current-date-time").textContent = `${dateString} - ${timeString}`;
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const displayHours = (hours % 12) || 12; // تحويل إلى نظام 12 ساعة
+            const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+            const ampm = hours >= 12 ? 'مساءً' : 'صباحًا'; // استبدال "مساءً" أو "صباحًا"
+            document.getElementById("current-date-time").textContent = `${displayHours}:${displayMinutes} ${ampm}`;
         }
 
         // تحديث الوقت كل ثانية
