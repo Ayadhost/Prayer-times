@@ -13,6 +13,9 @@
             color: #ffffff;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         h1 {
             margin: 20px 0;
@@ -23,10 +26,12 @@
             color: #bbbbbb;
             margin-bottom: 10px;
         }
-        #additional-text {
+        #footer-text {
             font-size: 1.5rem;
-            color: #bbbbbb;
-            margin-bottom: 30px;
+            color: #ffd700;
+            margin-top: auto;
+            padding: 10px;
+            white-space: nowrap; /* يبقي النص على سطر واحد */
         }
         table {
             width: 70%;
@@ -82,6 +87,9 @@
                 width: 40px;
                 height: 40px;
             }
+            #footer-text {
+                font-size: 1rem; /* تصغير حجم النص ليتناسب مع الشاشات الصغيرة */
+            }
         }
     </style>
 </head>
@@ -89,7 +97,6 @@
 
 <h1>أوقات الصلاة في بغداد</h1>
 <div id="current-date-time">جاري تحميل الوقت الفعلي...</div>
-<div id="additional-text">مواقيت الصلاة لمكتب الشهيد السيد محمد الصدر (قدس سره)</div>
 
 <table>
     <tr>
@@ -170,6 +177,8 @@
     <option value="32.2322,45.0669">واسط</option>
     <option value="33.7444,44.6172">ديالى</option>
 </select>
+
+<div id="footer-text">مواقيت الصلاة لمكتب الشهيد السيد محمد الصدر (قدس سره)</div>
 
 <script src="adhan.umd.min.js"></script>
 <script>
