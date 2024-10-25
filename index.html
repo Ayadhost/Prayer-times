@@ -16,7 +16,7 @@
         }
         h1 {
             margin: 20px 0;
-            font-size: 2rem; /* تصغير حجم العنوان */
+            font-size: 2.5rem;
         }
         #current-date-time {
             font-size: 2rem; /* تكبير الخط */
@@ -158,20 +158,20 @@
                 return num.replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
             }
 
-            // عرض أوقات الصلاة في العناصر المناسبة بدون الثواني مع "ص" و"م"
-            document.getElementById("fajr-time").textContent = toArabicNumbers(formatTimeWithAmPm(prayerTimes.fajr));
-            document.getElementById("sunrise-time").textContent = toArabicNumbers(formatTimeWithAmPm(prayerTimes.sunrise));
-            document.getElementById("dhuhr-time").textContent = toArabicNumbers(formatTimeWithAmPm(prayerTimes.dhuhr));
-            document.getElementById("maghrib-time").textContent = toArabicNumbers(formatTimeWithAmPm(prayerTimes.maghrib));
-            document.getElementById("isha-time").textContent = toArabicNumbers(formatTimeWithAmPm(prayerTimes.isha));
+            // عرض أوقات الصلاة في العناصر المناسبة
+            document.getElementById("fajr-time").textContent = toArabicNumbers(formatTime(prayerTimes.fajr));
+            document.getElementById("sunrise-time").textContent = toArabicNumbers(formatTime(prayerTimes.sunrise));
+            document.getElementById("dhuhr-time").textContent = toArabicNumbers(formatTime(prayerTimes.dhuhr));
+            document.getElementById("maghrib-time").textContent = toArabicNumbers(formatTime(prayerTimes.maghrib));
+            document.getElementById("isha-time").textContent = toArabicNumbers(formatTime(prayerTimes.isha));
 
-            // دالة تنسيق الوقت مع "ص" أو "م" وبدون الثواني
-            function formatTimeWithAmPm(date) {
+            // دالة تنسيق الوقت لعرض الساعات والدقائق فقط مع نقطتين بينهما
+            function formatTime(date) {
                 const hours = date.getHours();
                 const minutes = date.getMinutes();
                 const displayHours = (hours % 12) || 12; // تحويل إلى نظام 12 ساعة
                 const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
-                const ampm = hours >= 12 ? 'م' : 'ص'; // اختصارات "م" و"ص"
+                const ampm = hours >= 12 ? 'م' : 'ص'; // استبدال "صباحًا" بـ "ص" و"مساءً" بـ "م"
                 return `${displayHours}:${displayMinutes} ${ampm}`;
             }
         }
@@ -189,8 +189,8 @@
         // استدعاء أوقات الصلاة عند التحميل
         updatePrayerTimes(coordinates);
 
-        // تحديث الوقت الفعلي مع الثواني وكلمة صباحًا/مساءً كاملة
-        function updateCurrentDateTime() {
+        // تحديث الوقت الفعلي مع الثواني
+        function updateCurrentTime() {
             const now = new Date();
             const hours = now.getHours();
             const minutes = now.getMinutes();
@@ -198,14 +198,14 @@
             const displayHours = (hours % 12) || 12; // تحويل إلى نظام 12 ساعة
             const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
             const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
-            const ampm = hours >= 12 ? 'مساءً' : 'صباحًا'; // استبدال "مساءً" أو "صباحًا"
+            const ampm = hours >= 12 ? 'مساءً' : 'صباحًا';
+
             document.getElementById("current-date-time").textContent = toArabicNumbers(`${displayHours}:${displayMinutes}:${displaySeconds} ${ampm}`);
         }
 
-        // تحديث الوقت كل ثانية
-        setInterval(updateCurrentDateTime, 1000);
+        // تحديث الوقت الفعلي كل ثانية
+        setInterval(updateCurrentTime, 1000);
     });
 </script>
-
 </body>
 </html>
