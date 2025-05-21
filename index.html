@@ -66,35 +66,24 @@
             color: #ffffff;
         }
 
-        /* تنسيق السطر النصي الإضافي */
-        #footer-text {
-            font-size: 1.5rem;
-            color: #00bfff;
-            margin-top: 10px;
-        }
-
-        /* Media Query لتعديل التصميم على الشاشات الصغيرة */
-        @media (max-width: 600px) { 
-            table { 
+        @media (max-width: 600px) {
+            table {
                 width: 90%;
-            } 
-            th, td { 
+            }
+            th, td {
                 font-size: 1.4rem;
                 padding: 10px;
             }
-            .clock { 
+            .clock {
                 width: 40px;
                 height: 40px;
-            }
-            #footer-text {
-                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
 
-<h1>أوقات الصلاة في بغداد</h1>
+<h1>أوقات الصلاة في النجف</h1>
 <div id="current-date-time">جاري تحميل الوقت الفعلي...</div>
 
 <table>
@@ -159,7 +148,7 @@
 <select id="location" class="location-select">
     <option value="33.3152,44.3661">بغداد</option>
     <option value="31.9985,44.3356">كربلاء</option>
-    <option value="32.0351,44.3626">النجف</option>
+    <option value="32.0351,44.3626" selected>النجف</option>
     <option value="32.4646,45.9392">الديوانية</option>
     <option value="36.335,43.1189">الموصل</option>
     <option value="30.5085,47.7814">البصرة</option>
@@ -177,13 +166,11 @@
     <option value="33.7444,44.6172">ديالى</option>
 </select>
 
-<div id="footer-text">مكتب الشهيد السيد محمد الصدر (قدس سره)</div>
-
 <script src="adhan.umd.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const locationSelect = document.getElementById("location");
-    let coordinates = new adhan.Coordinates(33.3152, 44.3661);
+    let coordinates = new adhan.Coordinates(32.0351, 44.3626); // النجف
     const params = adhan.CalculationMethod.Other();
     params.fajrAngle = 18;
     params.ishaAngle = 4;
@@ -221,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function setClockTime(prayer, date) {
         const hours = date.getHours();
         const minutes = date.getMinutes();
-        
+
         const hourAngle = (hours % 12) * 30 + (0.5 * minutes);
         const minuteAngle = minutes * 6;
 
