@@ -27,21 +27,33 @@
     }
 
     .prayer-card {
-      display: grid;
-      grid-template-columns: 50px 1fr auto;
+      display: flex;
       align-items: center;
-      gap: 15px;
+      justify-content: space-between;
       background-color: #2e2e2e;
-      padding: 15px;
-      margin: 0 auto 15px;
+      padding: 15px 20px;
+      margin: 0 auto 20px;
       width: 85%;
-      border-bottom: 1px solid #444;
-      font-size: 1.6rem;
-      border-radius: 8px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+      border: 1px solid #333;
+      position: relative;
     }
 
-    .prayer-card:last-child {
-      border-bottom: none;
+    .prayer-card > div:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      height: 60%;
+      width: 1px;
+      background-color: #ffffff55;
+      right: 33%;
+      transform: translateY(20%);
+    }
+
+    .clock-container {
+      flex: 0 0 50px;
+      display: flex;
+      justify-content: center;
     }
 
     .clock {
@@ -52,13 +64,18 @@
     }
 
     .prayer-name {
-      text-align: right;
+      flex: 1;
+      text-align: center;
+      font-size: 1.6rem;
+      position: relative;
     }
 
     .prayer-time {
+      flex: 0 0 90px;
+      font-size: 1.6rem;
       font-weight: bold;
       color: #00ffcc;
-      text-align: left;
+      text-align: center;
     }
 
     .location-select {
@@ -75,27 +92,25 @@
 
     @media (max-width: 600px) {
       .prayer-card {
-        grid-template-columns: 1fr !important;
-        text-align: center;
-        padding: 15px !important;
-        row-gap: 10px;
-        margin-bottom: 15px;
-        border-radius: 10px;
+        flex-direction: row;
+        padding: 12px 10px;
+        width: 95%;
       }
 
       .clock {
-        margin: auto;
         width: 30px;
         height: 30px;
       }
 
       .prayer-name,
       .prayer-time {
-        text-align: center;
+        font-size: 1.3rem;
       }
 
-      .location-select {
-        width: 90%;
+      .prayer-card > div:not(:last-child)::after {
+        right: auto;
+        left: 33.33%;
+        transform: translateY(20%);
       }
     }
   </style>
@@ -106,51 +121,61 @@
 <div id="current-date-time">جاري تحميل الوقت الفعلي...</div>
 
 <div class="prayer-card">
-  <svg class="clock" viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
-    <line id="fajr-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
-    <line id="fajr-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
-  </svg>
+  <div class="clock-container">
+    <svg class="clock" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
+      <line id="fajr-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
+      <line id="fajr-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
+    </svg>
+  </div>
   <div class="prayer-name">الفجر</div>
   <div class="prayer-time" id="fajr-time"></div>
 </div>
 
 <div class="prayer-card">
-  <svg class="clock" viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
-    <line id="sunrise-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
-    <line id="sunrise-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
-  </svg>
+  <div class="clock-container">
+    <svg class="clock" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
+      <line id="sunrise-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
+      <line id="sunrise-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
+    </svg>
+  </div>
   <div class="prayer-name">الشروق</div>
   <div class="prayer-time" id="sunrise-time"></div>
 </div>
 
 <div class="prayer-card">
-  <svg class="clock" viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
-    <line id="dhuhr-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
-    <line id="dhuhr-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
-  </svg>
+  <div class="clock-container">
+    <svg class="clock" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
+      <line id="dhuhr-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
+      <line id="dhuhr-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
+    </svg>
+  </div>
   <div class="prayer-name">الظهر</div>
   <div class="prayer-time" id="dhuhr-time"></div>
 </div>
 
 <div class="prayer-card">
-  <svg class="clock" viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
-    <line id="maghrib-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
-    <line id="maghrib-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
-  </svg>
+  <div class="clock-container">
+    <svg class="clock" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
+      <line id="maghrib-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
+      <line id="maghrib-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
+    </svg>
+  </div>
   <div class="prayer-name">الغروب</div>
   <div class="prayer-time" id="maghrib-time"></div>
 </div>
 
 <div class="prayer-card">
-  <svg class="clock" viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
-    <line id="isha-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
-    <line id="isha-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
-  </svg>
+  <div class="clock-container">
+    <svg class="clock" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
+      <line id="isha-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
+      <line id="isha-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
+    </svg>
+  </div>
   <div class="prayer-name">العشاء</div>
   <div class="prayer-time" id="isha-time"></div>
 </div>
