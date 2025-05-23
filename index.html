@@ -29,8 +29,7 @@
     table {
       width: 70%;
       margin: 40px auto;
-      border-collapse: separate;
-      border-spacing: 0 10px;
+      border-collapse: collapse;
     }
 
     th, td {
@@ -60,6 +59,14 @@
       stroke: #00bfff;
     }
 
+    .separator {
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #888, transparent);
+      margin: 20px auto;
+      width: 90%;
+    }
+
     .location-select {
       margin: 20px auto;
       font-size: 1.6rem;
@@ -70,24 +77,6 @@
     label {
       font-size: 1.8rem;
       color: #ffffff;
-    }
-
-    .separator {
-      height: 2px;
-      margin: 10px auto;
-      width: 90%;
-      background: linear-gradient(to right, #ffffff20, #ffffffaa, #ffffff20);
-      border-radius: 5px;
-      animation: glow 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes glow {
-      from {
-        box-shadow: 0 0 5px #ffffff44;
-      }
-      to {
-        box-shadow: 0 0 15px #ffffffaa;
-      }
     }
 
     @media (max-width: 600px) {
@@ -124,7 +113,8 @@
     <td>الفجر</td>
     <td id="fajr-time"></td>
   </tr>
-  <tr><td colspan="3"><div class="separator"></div></td></tr>
+  <tr><td colspan="3"><hr class="separator"></td></tr>
+
   <tr>
     <td>
       <svg class="clock" viewBox="0 0 100 100">
@@ -136,7 +126,8 @@
     <td>الشروق</td>
     <td id="sunrise-time"></td>
   </tr>
-  <tr><td colspan="3"><div class="separator"></div></td></tr>
+  <tr><td colspan="3"><hr class="separator"></td></tr>
+
   <tr>
     <td>
       <svg class="clock" viewBox="0 0 100 100">
@@ -148,7 +139,8 @@
     <td>الظهر</td>
     <td id="dhuhr-time"></td>
   </tr>
-  <tr><td colspan="3"><div class="separator"></div></td></tr>
+  <tr><td colspan="3"><hr class="separator"></td></tr>
+
   <tr>
     <td>
       <svg class="clock" viewBox="0 0 100 100">
@@ -160,7 +152,8 @@
     <td>الغروب</td>
     <td id="maghrib-time"></td>
   </tr>
-  <tr><td colspan="3"><div class="separator"></div></td></tr>
+  <tr><td colspan="3"><hr class="separator"></td></tr>
+
   <tr>
     <td>
       <svg class="clock" viewBox="0 0 100 100">
