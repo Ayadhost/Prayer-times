@@ -36,26 +36,12 @@
       width: 85%;
       border-radius: 12px;
       box-shadow: 0 0 25px rgba(255, 255, 255, 0.07);
-      position: relative;
     }
 
-    .clock-container,
-    .prayer-name,
-    .prayer-time {
-      position: relative;
-      padding: 0 10px;
-    }
-
-    .clock-container::after,
-    .prayer-name::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
-      height: 50%;
-      width: 1px;
-      background-color: #ffffff33;
+    .clock-container {
+      flex: 0 0 50px;
+      display: flex;
+      justify-content: center;
     }
 
     .clock {
@@ -65,18 +51,25 @@
       stroke: #00bfff;
     }
 
+    .divider {
+      width: 1px;
+      height: 40px;
+      background-color: #ffffff33;
+      margin: 0 10px;
+    }
+
     .prayer-name {
-      font-size: 1.6rem;
       flex: 1;
       text-align: center;
+      font-size: 1.6rem;
     }
 
     .prayer-time {
+      flex: 0 0 90px;
       font-size: 1.6rem;
       font-weight: bold;
       color: #00ffcc;
       text-align: center;
-      min-width: 80px;
     }
 
     .location-select {
@@ -103,15 +96,12 @@
         height: 30px;
       }
 
-      .prayer-name,
-      .prayer-time {
-        font-size: 1.3rem;
+      .divider {
+        height: 30px;
       }
 
-      .clock-container,
-      .prayer-name,
-      .prayer-time {
-        padding: 0 6px;
+      .prayer-name, .prayer-time {
+        font-size: 1.3rem;
       }
     }
   </style>
@@ -129,7 +119,9 @@
       <line id="fajr-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
     </svg>
   </div>
+  <div class="divider"></div>
   <div class="prayer-name">الفجر</div>
+  <div class="divider"></div>
   <div class="prayer-time" id="fajr-time"></div>
 </div>
 
@@ -141,7 +133,9 @@
       <line id="sunrise-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
     </svg>
   </div>
+  <div class="divider"></div>
   <div class="prayer-name">الشروق</div>
+  <div class="divider"></div>
   <div class="prayer-time" id="sunrise-time"></div>
 </div>
 
@@ -153,7 +147,9 @@
       <line id="dhuhr-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
     </svg>
   </div>
+  <div class="divider"></div>
   <div class="prayer-name">الظهر</div>
+  <div class="divider"></div>
   <div class="prayer-time" id="dhuhr-time"></div>
 </div>
 
@@ -165,7 +161,9 @@
       <line id="maghrib-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
     </svg>
   </div>
+  <div class="divider"></div>
   <div class="prayer-name">الغروب</div>
+  <div class="divider"></div>
   <div class="prayer-time" id="maghrib-time"></div>
 </div>
 
@@ -177,7 +175,9 @@
       <line id="isha-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
     </svg>
   </div>
+  <div class="divider"></div>
   <div class="prayer-name">العشاء</div>
+  <div class="divider"></div>
   <div class="prayer-time" id="isha-time"></div>
 </div>
 
