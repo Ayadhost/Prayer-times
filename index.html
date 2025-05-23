@@ -54,10 +54,10 @@
 
     .divider {
       width: 1px;
-      height: 70%;
-      background-color: #ffffff33;
+      background-color: #ffffff66;
       margin: 0 14px;
-      align-self: center;
+      align-self: stretch;
+      opacity: 0.5;
     }
 
     .prayer-name {
@@ -98,7 +98,7 @@
       }
 
       .divider {
-        height: 60%;
+        height: auto;
         margin: 0 8px;
       }
 
@@ -114,7 +114,7 @@
 <h1>أوقات الصلاة في النجف</h1>
 <div id="current-date-time">جاري تحميل الوقت الفعلي...</div>
 
-<!-- بطاقة الصلاة -->
+<!-- بطاقات الصلاة -->
 <div class="prayer-card">
   <div class="clock-container">
     <svg class="clock" viewBox="0 0 100 100">
@@ -185,6 +185,7 @@
   <div class="prayer-time" id="isha-time"></div>
 </div>
 
+<!-- تحديد الموقع -->
 <label for="location">حدد المحافظة:</label>
 <select id="location" class="location-select">
   <option value="33.3152,44.3661">بغداد</option>
