@@ -33,10 +33,11 @@
       gap: 15px;
       background-color: #2e2e2e;
       padding: 15px;
-      margin: 0 auto;
+      margin: 0 auto 15px;
       width: 85%;
       border-bottom: 1px solid #444;
       font-size: 1.6rem;
+      border-radius: 8px;
     }
 
     .prayer-card:last-child {
@@ -74,10 +75,12 @@
 
     @media (max-width: 600px) {
       .prayer-card {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
         text-align: center;
-        padding: 10px;
-        font-size: 1.3rem;
+        padding: 15px !important;
+        row-gap: 10px;
+        margin-bottom: 15px;
+        border-radius: 10px;
       }
 
       .clock {
@@ -86,7 +89,8 @@
         height: 30px;
       }
 
-      .prayer-name, .prayer-time {
+      .prayer-name,
+      .prayer-time {
         text-align: center;
       }
 
