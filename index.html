@@ -26,31 +26,21 @@
       margin-bottom: 20px;
     }
 
-    .table-title {
-      font-size: 1.6rem;
-      color: #00bfff;
-      margin-top: 20px;
-      margin-bottom: 10px;
-    }
-
-    table {
-      width: 85%;
-      margin: 0 auto 40px;
-      border-collapse: separate;
-      border-spacing: 0 15px;
-    }
-
-    td {
+    .prayer-card {
       background-color: #2e2e2e;
       border-radius: 12px;
       padding: 15px;
-      font-size: 1.5rem;
+      margin: 15px auto;
+      width: 85%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
-      transition: transform 0.2s ease;
+      border-bottom: 1px solid #444;
     }
 
-    td:hover {
-      transform: scale(1.02);
+    .prayer-card:last-child {
+      border-bottom: none;
     }
 
     .clock {
@@ -58,6 +48,16 @@
       height: 40px;
       fill: #00bfff;
       stroke: #00bfff;
+    }
+
+    .prayer-name {
+      font-size: 1.6rem;
+      flex: 1;
+    }
+
+    .prayer-time {
+      font-size: 1.6rem;
+      min-width: 90px;
     }
 
     .location-select {
@@ -73,18 +73,24 @@
     }
 
     @media (max-width: 600px) {
-      table {
-        width: 95%;
+      .prayer-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
       }
 
-      td {
-        font-size: 1.2rem;
-        padding: 10px;
+      .prayer-name,
+      .prayer-time {
+        margin-top: 10px;
       }
 
       .clock {
         width: 30px;
         height: 30px;
+      }
+
+      .location-select {
+        width: 90%;
       }
     }
   </style>
@@ -94,65 +100,55 @@
 <h1>أوقات الصلاة في النجف</h1>
 <div id="current-date-time">جاري تحميل الوقت الفعلي...</div>
 
-<div class="table-title">الساعة الرمزية | الصلاة | الوقت</div>
+<div class="prayer-card">
+  <svg class="clock" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
+    <line id="fajr-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
+    <line id="fajr-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
+  </svg>
+  <div class="prayer-name">الفجر</div>
+  <div class="prayer-time" id="fajr-time"></div>
+</div>
 
-<table>
-  <tr>
-    <td>
-      <svg class="clock" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
-        <line id="fajr-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
-        <line id="fajr-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
-      </svg>
-    </td>
-    <td>الفجر</td>
-    <td id="fajr-time"></td>
-  </tr>
-  <tr>
-    <td>
-      <svg class="clock" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
-        <line id="sunrise-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
-        <line id="sunrise-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
-      </svg>
-    </td>
-    <td>الشروق</td>
-    <td id="sunrise-time"></td>
-  </tr>
-  <tr>
-    <td>
-      <svg class="clock" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
-        <line id="dhuhr-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
-        <line id="dhuhr-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
-      </svg>
-    </td>
-    <td>الظهر</td>
-    <td id="dhuhr-time"></td>
-  </tr>
-  <tr>
-    <td>
-      <svg class="clock" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
-        <line id="maghrib-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
-        <line id="maghrib-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
-      </svg>
-    </td>
-    <td>الغروب</td>
-    <td id="maghrib-time"></td>
-  </tr>
-  <tr>
-    <td>
-      <svg class="clock" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
-        <line id="isha-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
-        <line id="isha-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
-      </svg>
-    </td>
-    <td>العشاء</td>
-    <td id="isha-time"></td>
-  </tr>
-</table>
+<div class="prayer-card">
+  <svg class="clock" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
+    <line id="sunrise-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
+    <line id="sunrise-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
+  </svg>
+  <div class="prayer-name">الشروق</div>
+  <div class="prayer-time" id="sunrise-time"></div>
+</div>
+
+<div class="prayer-card">
+  <svg class="clock" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
+    <line id="dhuhr-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
+    <line id="dhuhr-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
+  </svg>
+  <div class="prayer-name">الظهر</div>
+  <div class="prayer-time" id="dhuhr-time"></div>
+</div>
+
+<div class="prayer-card">
+  <svg class="clock" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
+    <line id="maghrib-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
+    <line id="maghrib-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
+  </svg>
+  <div class="prayer-name">الغروب</div>
+  <div class="prayer-time" id="maghrib-time"></div>
+</div>
+
+<div class="prayer-card">
+  <svg class="clock" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="45" stroke-width="2" fill="none"/>
+    <line id="isha-hour" x1="50" y1="50" x2="50" y2="30" stroke-width="2"/>
+    <line id="isha-minute" x1="50" y1="50" x2="50" y2="20" stroke-width="2"/>
+  </svg>
+  <div class="prayer-name">العشاء</div>
+  <div class="prayer-time" id="isha-time"></div>
+</div>
 
 <label for="location">حدد المحافظة:</label>
 <select id="location" class="location-select">
